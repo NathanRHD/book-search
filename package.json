@@ -6,7 +6,8 @@
   "scripts": {
     "webpack": "webpack --config ./webpack.config.js",
     "build": "npm run webpack && cp distribution/web.js static/scripts/bundle.js && cp distribution/web.css static/styling/main.css",
-    "serve": "node distribution/server.js"
+    "serve": "node distribution/server.js",
+    "start": "npm run serve"
   },
   "repository": {
     "type": "git",
