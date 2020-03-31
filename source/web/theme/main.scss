@@ -1,0 +1,71 @@
+@import "./keyframes.scss";
+@import "./fonts.scss";
+@import "./variables.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+#root {
+  min-height: 100%;
+}
+
+p,
+li {
+  font-size: $font-size-large;
+  margin: 0;
+  margin-bottom: $spacing-large;
+}
+
+h1 {
+  font-family: "Rubik", "Lato", sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: $font-size-xx-large;
+  margin: 0;
+}
+
+a.inline-link {
+  color: #138cbf;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: $font-size-large;
+  margin-bottom: $spacing-large;
+
+  thead {
+    font-weight: 700;
+  }
+
+  tbody {
+    font-weight: 300;
+  }
+
+  td {
+    padding: $spacing-medium;
+  }
+
+  tr.emphasis {
+    font-weight: 400;
+  }
+}
+
+@media (max-width: 950px) {
+  body,
+  #root {
+    min-height: 100%;
+    height: auto;
+  }
+}
