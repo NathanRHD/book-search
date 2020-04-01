@@ -3,12 +3,13 @@ import * as React from "react";
 import "./home.scss";
 
 import { LoadingSpinner } from "../loading-spinner";
-import { Card } from "../card";
+import { Card, Status } from "../card";
 
 export const Home = () => {
-  const leninCard = {
+  const leninCard: Card.Props = {
     title: "The State and Revolution",
-    author: "V.I. Lenin"
+    author: "V.I. Lenin",
+    statuses: [Status.Unread, Status.Reading]
   };
   return (
     <div className="home">
@@ -19,7 +20,16 @@ export const Home = () => {
         </div>
       </div>
       <div className="main">
-        <Card.Component {...leninCard} />
+        <div className="search-results">
+          <Card.Component {...leninCard} />
+          <Card.Component {...leninCard} />
+          <Card.Component {...leninCard} />
+          <Card.Component {...leninCard} />
+          <Card.Component {...leninCard} />
+          <Card.Component {...leninCard} />
+          <Card.Component {...leninCard} />
+          <Card.Component {...leninCard} />
+        </div>
         <LoadingSpinner />
       </div>
     </div>
