@@ -1,3 +1,5 @@
+@import "../theme/variables.scss";
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -17,10 +19,10 @@
       animation-timing-function: linear;
     }
     g.rays {
-      animation-duration: 10s;
+      animation-duration: 15s;
     }
     path.gear {
-      animation-duration: 14s;
+      animation-duration: 25s;
       animation-direction: reverse;
     }
   }

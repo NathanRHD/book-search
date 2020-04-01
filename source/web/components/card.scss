@@ -1,0 +1,38 @@
+@import "../theme/variables.scss";
+
+.card {
+  border: 1px solid $gray-light;
+  border-radius: $spacing-small;
+
+  background-color: #ffffff;
+
+  padding: $spacing-large;
+
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+
+  > .main {
+    flex-grow: 1;
+
+    > .title {
+      margin: 0;
+
+      font-size: $font-size-large;
+    }
+    > .author {
+      display: block;
+      margin: 0;
+
+      font-size: $font-size-medium;
+    }
+  }
+
+  > i {
+    color: $gray-x-dark;
+    font-size: $font-size-x-large;
+
+    margin-left: $spacing-large;
+  }
+}

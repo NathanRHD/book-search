@@ -1,14 +1,14 @@
 // Brand colours
-$red-dark: #bb3333;
-$red-light: #ff7777;
+$red-dark: hsl(0, 70%, 37%);
+$red-light: hsl(0, 100%, 73%);
 
-$grey-x-dark: #222222;
-$grey-dark: #444444;
-$grey-light: #888888;
-$grey-x-light: #eeeeee;
+$gray-x-dark: hsl(0, 0%, 13%);
+$gray-dark: hsl(0, 0%, 27%);
+$gray-light: hsl(0, 0%, 53%);
+$gray-x-light: hsl(0, 0%, 93%);
 
-$gold-dark: #cc9900;
-$gold-light: #ffcc33;
+$gold-dark: hsl(45, 100%, 30%);
+$gold-light: hsl(45, 100%, 60%);
 
 // Spacing
 
@@ -22,7 +22,7 @@ $spacing-x-small: 1px;
 
 // Font sizes
 
-$font-size-small: 0.9rem;
+$font-size-small: 0.8rem;
 $font-size-medium: 1rem;
 $font-size-large: 1.3rem;
 $font-size-x-large: 2.3rem;

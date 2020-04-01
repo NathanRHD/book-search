@@ -6,33 +6,31 @@
 
   height: 100%;
 
-  .header {
-    background: linear-gradient(45deg, $red-dark, $red-light);
+  > .header {
+    background: linear-gradient(90deg, $red-dark, $red-light);
 
     padding-top: $spacing-xxx-large;
     padding-bottom: 0;
 
     box-shadow: $standard-box-shadow;
 
-    h1 {
+    > h1 {
       color: white;
-      -webkit-text-stroke: 2px $grey-dark;
+      -webkit-text-stroke: 3px $gray-x-dark;
 
       position: absolute;
       top: $spacing-x-large;
       left: $spacing-xx-large;
-
-      text-shadow: $spacing-small $spacing-small rgba(0, 0, 0, 0.75);
     }
 
-    .search-box {
+    > .search-box {
       padding: $spacing-medium $spacing-xx-large;
       padding-top: $spacing-large;
 
-      background: $grey-x-dark;
+      background: $gray-x-dark;
 
-      input {
-        background-color: $grey-dark;
+      > input {
+        background-color: $gray-dark;
         color: white;
 
         border: none;
@@ -47,7 +45,7 @@
       }
     }
   }
-  .main {
+  > .main {
     display: flex;
     flex-direction: row;
     align-items: center;
