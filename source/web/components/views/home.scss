@@ -58,14 +58,9 @@
     > .search-results {
       width: 100%;
 
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-
-      > .card {
-        width: calc(33% - #{$spacing-medium} * 2);
-        margin: $spacing-medium;
-      }
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax($min-card-width, 1fr));
+      grid-gap: $spacing-large;
     }
   }
 }
