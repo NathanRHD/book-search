@@ -21,16 +21,16 @@ body {
 
 p,
 li {
-  font-size: $font-size-large;
+  font-size: var(--font-size-large);
   margin: 0;
-  margin-bottom: $spacing-large;
+  margin-bottom: var(--spacing-large);
 }
 
 h1 {
   font-family: "Rubik", "Lato", sans-serif;
   font-style: italic;
   font-weight: 900;
-  font-size: $font-size-xx-large;
+  font-size: var(--font-size-xxlarge);
   margin: 0;
 }
 
@@ -42,8 +42,8 @@ a.inline-link {
 
 table {
   border-collapse: collapse;
-  font-size: $font-size-large;
-  margin-bottom: $spacing-large;
+  font-size: var(--font-size-large);
+  margin-bottom: var(--spacing-large);
 
   thead {
     font-weight: 700;
@@ -54,7 +54,7 @@ table {
   }
 
   td {
-    padding: $spacing-medium;
+    padding: var(--spacing-medium);
   }
 
   tr.emphasis {

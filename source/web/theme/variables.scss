@@ -1,4 +1,4 @@
-// Brand colours
+// - Brand colours
 $red-dark: hsl(0, 70%, 37%);
 $red-light: hsl(0, 100%, 73%);
 
@@ -10,25 +10,47 @@ $gray-x-light: hsl(0, 0%, 93%);
 $gold-dark: hsl(45, 100%, 30%);
 $gold-light: hsl(45, 100%, 60%);
 
-// Spacing
+// - Misc
+$standard-box-shadow: 0 var(--spacing-small) var(--spacing-small) 0
+  rgba(0, 0, 0, 0.75);
 
-$spacing-xxx-large: 75px;
-$spacing-xx-large: 50px;
-$spacing-x-large: 40px;
-$spacing-large: 20px;
-$spacing-medium: 10px;
-$spacing-small: 5px;
-$spacing-x-small: 1px;
+// Responsive
+body {
+  // - Spacing
+  --spacing-xxxlarge: 75px;
+  --spacing-xxlarge: 50px;
+  --spacing-xlarge: 40px;
+  --spacing-large: 20px;
+  --spacing-medium: 10px;
+  --spacing-small: 5px;
+  --spacing-xsmall: 1px;
 
-// Font sizes
+  // - Font sizes
+  --font-size-small: 0.8rem;
+  --font-size-medium: 1rem;
+  --font-size-large: 1.3rem;
+  --font-size-xlarge: 2.3rem;
+  --font-size-xxlarge: 3rem;
 
-$font-size-small: 0.8rem;
-$font-size-medium: 1rem;
-$font-size-large: 1.3rem;
-$font-size-x-large: 2.3rem;
-$font-size-xx-large: 3rem;
+  // - Misc
+  --min-card-width: 350px;
 
-// Misc
+  // - Mobile
+  @media screen and (max-width: 500px) {
+    // - - Spacing
+    --spacing-xxxlarge: 50px;
+    --spacing-xxlarge: 40px;
+    --spacing-xlarge: 20px;
+    --spacing-large: 10px;
+    --spacing-medium: 5px;
+    --spacing-small: 2.5px;
+    --spacing-xsmall: 1px;
 
-$min-card-width: 350px;
-$standard-box-shadow: 0 $spacing-small $spacing-small 0 rgba(0, 0, 0, 0.75);
+    // - - Font sizes
+    --font-size-small: 0.7rem;
+    --font-size-medium: 0.8rem;
+    --font-size-large: 1rem;
+    --font-size-xlarge: 1.6rem;
+    --font-size-xxlarge: 2.3rem;
+  }
+}

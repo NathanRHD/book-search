@@ -9,7 +9,7 @@
   > .header {
     background: linear-gradient(90deg, $red-dark, $red-light);
 
-    padding-top: $spacing-xxx-large;
+    padding-top: var(--spacing-xxxlarge);
     padding-bottom: 0;
 
     box-shadow: $standard-box-shadow;
@@ -19,13 +19,13 @@
       -webkit-text-stroke: 3px $gray-x-dark;
 
       position: absolute;
-      top: $spacing-x-large;
-      left: $spacing-xx-large;
+      top: var(--spacing-xlarge);
+      left: var(--spacing-xxlarge);
     }
 
     > .search-box {
-      padding: $spacing-medium $spacing-xx-large;
-      padding-top: $spacing-large;
+      padding: var(--spacing-medium) var(--spacing-xxlarge);
+      padding-top: var(--spacing-large);
 
       background: $gray-x-dark;
 
@@ -34,12 +34,12 @@
         color: white;
 
         border: none;
-        border-radius: $spacing-small;
+        border-radius: var(--spacing-small);
 
         width: 100%;
-        height: $font-size-xx-large;
-        font-size: $font-size-large;
-        padding: $spacing-medium;
+        height: var(--font-size-xxlarge);
+        font-size: var(--font-size-large);
+        padding: var(--spacing-medium);
 
         box-shadow: $standard-box-shadow inset;
       }
@@ -48,7 +48,7 @@
   > .main {
     flex-grow: 1;
 
-    padding: $spacing-large;
+    padding: var(--spacing-xxlarge);
 
     display: flex;
     flex-direction: column;
@@ -59,8 +59,11 @@
       width: 100%;
 
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax($min-card-width, 1fr));
-      grid-gap: $spacing-large;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(var(--min-card-width), 1fr)
+      );
+      grid-gap: var(--spacing-large);
     }
   }
 }

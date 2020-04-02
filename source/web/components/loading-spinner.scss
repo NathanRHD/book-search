@@ -9,8 +9,25 @@
   }
 }
 
+@keyframes enter {
+  from {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
 .loading-spinner {
   svg {
+    transform-origin: center;
+    animation-name: enter;
+    animation-timing-function: linear;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+
     g.rays,
     path.gear {
       transform-origin: center;

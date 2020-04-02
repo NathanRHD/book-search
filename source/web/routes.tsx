@@ -2,7 +2,7 @@ import * as React from "react";
 import { Route, IndexRoute } from "react-router";
 
 import { Home } from "./components/views/home";
-import { Shell } from "./components/views/shell";
+import { Details } from "./components/views/details";
 
 export interface RouteDefinition {
   path?: string;
@@ -15,12 +15,12 @@ export const IndexPath = "__INDEX";
 
 export const routesDefinitions: RouteDefinition[] = [
   {
-    component: Shell,
+    component: Home,
     path: "/",
     childRoutes: [
       {
-        path: IndexPath,
-        component: Home
+        path: "details",
+        component: Details
       }
     ]
   }

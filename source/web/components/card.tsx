@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import "./card.scss";
+import { withRouter, WithRouterProps } from "react-router";
 
 export enum Status {
   /** Has not been completely read */
@@ -27,7 +28,10 @@ export namespace Card {
     title: string;
     author: string;
     statuses: Status[];
-  };
+
+    // optional for dev purposes...
+    id?: number;
+  } & WithRouterProps;
 
   const getIconFromStatus = (status: Status) => {
     switch (status) {
@@ -52,7 +56,7 @@ export namespace Card {
     }
   };
 
-  export const Component: React.FC<Props> = props => {
+  export const Component = withRouter((props: Props) => {
     const primaryStatus = React.useMemo(() => Math.max(...props.statuses), [
       props.statuses
     ]);
@@ -61,8 +65,12 @@ export namespace Card {
       primaryStatus
     ]);
 
+    const openDetails = React.useCallback(() => {
+      props.router.push(`/details/${props.id || ""}`);
+    }, [props.router, props.id]);
+
     return (
-      <div className="card">
+      <div className="card" onClick={openDetails}>
         <div className="main">
           <h2 className="title">{props.title}</h2>
           <span className="author">{props.author}</span>
@@ -70,5 +78,5 @@ export namespace Card {
         <i className={icon}></i>
       </div>
     );
-  };
+  });
 }

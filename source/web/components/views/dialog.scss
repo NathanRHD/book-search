@@ -1,0 +1,31 @@
+@import "../../theme/variables.scss";
+
+.dialog-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  height: 100%;
+  width: 100%;
+}
+.dialog {
+  --dialog-width: 900px;
+  --dialog-height: 600px;
+
+  position: fixed;
+
+  width: var(--dialog-width);
+  max-width: 100%;
+
+  height: var(--dialog-height);
+  max-height: 100%;
+
+  border: 1px solid $gray-light;
+  border-radius: var(--spacing-small);
+  box-shadow: $standard-box-shadow;
+
+  background-color: #ffffff;
+}

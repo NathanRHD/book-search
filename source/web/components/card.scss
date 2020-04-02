@@ -2,12 +2,12 @@
 
 .card {
   border: 1px solid $gray-light;
-  border-radius: $spacing-small;
+  border-radius: var(--spacing-small);
 
   background-color: #ffffff;
 
-  padding: $spacing-large;
-  min-width: $min-card-width;
+  padding: var(--spacing-large);
+  min-width: var(--min-card-width);
 
   cursor: pointer;
 
@@ -20,20 +20,20 @@
     > .title {
       margin: 0;
 
-      font-size: $font-size-large;
+      font-size: var(--font-size-large);
     }
     > .author {
       display: block;
       margin: 0;
 
-      font-size: $font-size-medium;
+      font-size: var(--font-size-medium);
     }
   }
 
   > i {
     color: $gray-x-dark;
-    font-size: $font-size-x-large;
+    font-size: var(--font-size-xlarge);
 
-    margin-left: $spacing-large;
+    margin-left: var(--spacing-large);
   }
 }
