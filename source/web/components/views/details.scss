@@ -1,0 +1,12 @@
+@import "../../theme/variables.scss";
+
+.details {
+  > .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: var(--spacing-medium);
+    border-bottom: 1px solid $gray-x-light;
+  }
+}

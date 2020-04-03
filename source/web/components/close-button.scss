@@ -1,0 +1,17 @@
+@import "../theme/variables.scss";
+
+.close-button {
+  cursor: pointer;
+
+  height: var(--font-size-xlarge);
+  width: var(--font-size-xlarge);
+
+  svg {
+    height: 100%;
+    width: 100%;
+
+    path {
+      stroke: $red-dark;
+    }
+  }
+}

@@ -10,22 +10,35 @@
 
   height: 100%;
   width: 100%;
-}
-.dialog {
-  --dialog-width: 900px;
-  --dialog-height: 600px;
 
-  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  width: var(--dialog-width);
-  max-width: 100%;
+  > .dialog {
+    $dialog-width: 900px;
+    $dialog-height: 600px;
 
-  height: var(--dialog-height);
-  max-height: 100%;
+    width: $dialog-width;
+    max-width: 100%;
 
-  border: 1px solid $gray-light;
-  border-radius: var(--spacing-small);
-  box-shadow: $standard-box-shadow;
+    height: $dialog-height;
+    max-height: 100%;
 
-  background-color: #ffffff;
+    border: 1px solid $gray-light;
+    border-radius: var(--spacing-small);
+    box-shadow: $standard-box-shadow;
+
+    background-color: #ffffff;
+    cursor: auto;
+
+    @media screen and (max-width: $dialog-width),
+      screen and (max-height: $dialog-height) {
+      border: none;
+      border-radius: 0;
+
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
