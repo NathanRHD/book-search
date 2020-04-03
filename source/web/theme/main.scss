@@ -26,12 +26,25 @@ li {
   margin-bottom: var(--spacing-large);
 }
 
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 900;
+}
+
 h1 {
   font-family: "Rubik", "Lato", sans-serif;
   font-style: italic;
-  font-weight: 900;
-  font-size: var(--font-size-xxxlarge);
-  margin: 0;
+  font-size: var(--font-size-xxlarge);
+}
+
+h2 {
+  font-size: var(--font-size-xlarge);
+}
+
+h3 {
+  font-size: var(--font-size-large);
 }
 
 a.inline-link {

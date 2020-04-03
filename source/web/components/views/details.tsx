@@ -25,9 +25,9 @@ export const Details: React.FC<DetailsProps> = props => {
         <div className="dialog details" onClick={stopPropOnClick}>
           <div className="header">
             <div className="user-details"></div>
-            <CloseButton.Component onClick={closeDialog} />
+            <CloseButton.Component to="/" />
           </div>
-          <div className="content"></div>
+          <div className="content">{props.children}</div>
         </div>
       </div>
     </>

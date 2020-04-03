@@ -7,7 +7,10 @@
   height: 100%;
 
   > .header {
-    background: linear-gradient(90deg, $red-dark, $red-light);
+    position: sticky;
+    top: 0;
+
+    background: $red-gradient;
 
     padding-top: var(--spacing-xxxlarge);
     padding-bottom: 0;
@@ -17,6 +20,8 @@
     > h1 {
       color: white;
       -webkit-text-stroke: 3px $gray-x-dark;
+
+      font-size: var(--font-size-xxxlarge);
 
       position: absolute;
       top: var(--spacing-xlarge);

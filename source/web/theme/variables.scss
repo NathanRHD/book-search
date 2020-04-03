@@ -2,6 +2,8 @@
 $red-dark: hsl(0, 70%, 37%);
 $red-light: hsl(0, 100%, 73%);
 
+$red-gradient: linear-gradient(90deg, $red-dark, $red-light);
+
 $gray-x-dark: hsl(0, 0%, 13%);
 $gray-dark: hsl(0, 0%, 27%);
 $gray-light: hsl(0, 0%, 53%);
@@ -23,7 +25,7 @@ body {
   --spacing-large: 20px;
   --spacing-medium: 10px;
   --spacing-small: 5px;
-  --spacing-xsmall: 1px;
+  --spacing-xsmall: 2.5px;
 
   // - Font sizes
   --font-size-small: 0.8rem;
@@ -51,7 +53,11 @@ body {
     --font-size-small: 0.7rem;
     --font-size-medium: 0.8rem;
     --font-size-large: 1rem;
+    --font-size-xlarge: 1.3rem;
     --font-size-xxlarge: 1.6rem;
     --font-size-xxxlarge: 2.3rem;
+
+    // - - Misc
+    --min-card-width: 300px;
   }
 }

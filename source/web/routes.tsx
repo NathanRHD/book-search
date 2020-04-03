@@ -3,6 +3,7 @@ import { Route, IndexRoute } from "react-router";
 
 import { Home } from "./components/views/home";
 import { Details } from "./components/views/details";
+import { ViewBook } from "./components/views/view-book";
 
 export interface RouteDefinition {
   path?: string;
@@ -20,7 +21,13 @@ export const routesDefinitions: RouteDefinition[] = [
     childRoutes: [
       {
         path: "details",
-        component: Details
+        component: Details,
+        childRoutes: [
+          {
+            path: ":id",
+            component: ViewBook.Component
+          }
+        ]
       }
     ]
   }

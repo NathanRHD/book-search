@@ -1,20 +1,22 @@
 import * as React from "react";
+import * as _ from "underscore";
 
 import "./home.scss";
 
 import { LoadingSpinner } from "../loading-spinner";
-import { Card, Status } from "../card";
+import { Card } from "../card";
 import Helmet from "react-helmet";
 import { RouteComponentProps } from "react-router";
+import { Book } from "../../../data/books";
 
 type HomeProps = {} & RouteComponentProps<{}, {}>;
 
 export const Home: React.FC<HomeProps> = props => {
-  const leninCard = {
-    title: "The State and Revolution",
-    author: "V.I. Lenin",
-    statuses: [Status.Unread, Status.Reading]
-  };
+  const searchResults = React.useMemo(
+    () => _.values(Book.repository).map(book => <Card.Component {...book} />),
+    []
+  );
+
   return (
     <div className="home">
       <Helmet>
@@ -28,16 +30,7 @@ export const Home: React.FC<HomeProps> = props => {
         </div>
       </div>
       <div className="main">
-        <div className="search-results">
-          <Card.Component {...leninCard} />
-          <Card.Component {...leninCard} />
-          <Card.Component {...leninCard} />
-          <Card.Component {...leninCard} />
-          <Card.Component {...leninCard} />
-          <Card.Component {...leninCard} />
-          <Card.Component {...leninCard} />
-          <Card.Component {...leninCard} />
-        </div>
+        <div className="search-results">{searchResults}</div>
         <LoadingSpinner />
         {props.children}
       </div>

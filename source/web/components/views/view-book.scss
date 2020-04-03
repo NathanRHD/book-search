@@ -1,0 +1,65 @@
+@import "../../theme/variables.scss";
+@import "./dialog.scss";
+
+.view-book {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: row;
+
+  overflow: hidden;
+
+  > .aside {
+    border-right: var(--spacing-xsmall) solid $red-dark;
+    width: 250px;
+
+    overflow: auto;
+
+    > .aside-list {
+      > .aside-item {
+        display: block;
+        color: #000000;
+        text-decoration: none;
+
+        cursor: pointer;
+
+        padding: var(--spacing-medium);
+        border-bottom: 1px solid $gray-x-light;
+
+        overflow: hidden;
+
+        > span {
+          display: block;
+          font-size: var(--font-size-small);
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &.title {
+            font-weight: 900;
+          }
+        }
+
+        &.active {
+          background: $red-gradient;
+          color: #ffffff;
+
+          border-color: transparent;
+        }
+      }
+    }
+
+    @media screen and (max-width: $dialog-width) {
+      display: none;
+    }
+  }
+  > .main {
+    flex-grow: 1;
+    padding: var(--spacing-medium);
+
+    > h2 {
+      font-size: var(--font-size-large);
+    }
+  }
+}

@@ -1,6 +1,9 @@
 @import "../theme/variables.scss";
 
 .card {
+  color: #000000;
+  text-decoration: none;
+
   border: 1px solid $gray-light;
   border-radius: var(--spacing-small);
 
@@ -13,14 +16,20 @@
 
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   > .main {
     flex-grow: 1;
+    overflow: hidden;
 
     > .title {
       margin: 0;
 
       font-size: var(--font-size-large);
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     > .author {
       display: block;
