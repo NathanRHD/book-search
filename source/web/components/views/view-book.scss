@@ -17,11 +17,11 @@
 
     > .aside-list {
       > .aside-item {
+        cursor: pointer;
+
         display: block;
         color: #000000;
         text-decoration: none;
-
-        cursor: pointer;
 
         padding: var(--spacing-medium);
         border-bottom: 1px solid $gray-x-light;
