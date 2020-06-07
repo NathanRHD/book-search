@@ -19,9 +19,10 @@ export const Home: React.FC<HomeProps> = props => {
 
   return (
     <div className="home">
-      <Helmet>
-        <title>Nathan's Books</title>
-      </Helmet>
+      <Helmet
+        defaultTitle="Nathan's Books"
+        titleTemplate="Nathan's Books | %s"
+      />
 
       <div className="header">
         <h1>Nathan's Books</h1>
