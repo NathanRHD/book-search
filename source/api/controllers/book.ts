@@ -17,4 +17,19 @@ export namespace BookController {
     "GET",
     getOne
   );
+
+  const getMany = async (req: Express.Request, res: Express.Response) => {
+    // @todo validate pagination options and search term
+    const { paginationOptions, searchTerm } = req.body;
+
+    const response = await BookService.getMany({
+      paginationOptions,
+      searchTerm,
+      context: req["context"],
+    });
+
+    res.status(200).send(JSON.stringify(response));
+  };
+
+  registerEndpoints((params) => `/books`, "POST", getMany);
 }

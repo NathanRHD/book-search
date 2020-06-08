@@ -172,6 +172,68 @@ body {
       --font-size-xxxlarge: 2.3rem;
       --min-card-width: 300px; } }
 
+.card {
+  color: #000000;
+  text-decoration: none;
+  border: 1px solid #878787;
+  border-radius: var(--spacing-small);
+  background-color: #ffffff;
+  padding: var(--spacing-large);
+  min-width: var(--min-card-width);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .card > .main {
+    flex-grow: 1;
+    overflow: hidden; }
+    .card > .main > .title {
+      margin: 0;
+      font-size: var(--font-size-large);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .card > .main > .author {
+      display: block;
+      margin: 0;
+      font-size: var(--font-size-medium); }
+  .card > i {
+    color: #212121;
+    font-size: var(--font-size-xxlarge);
+    margin-left: var(--spacing-large); }
+
+body {
+  --spacing-xxxlarge: 75px;
+  --spacing-xxlarge: 50px;
+  --spacing-xlarge: 40px;
+  --spacing-large: 20px;
+  --spacing-medium: 10px;
+  --spacing-small: 5px;
+  --spacing-xsmall: 2.5px;
+  --font-size-small: 0.8rem;
+  --font-size-medium: 1rem;
+  --font-size-large: 1.3rem;
+  --font-size-xlarge: 1.9rem;
+  --font-size-xxlarge: 2.3rem;
+  --font-size-xxxlarge: 3rem;
+  --min-card-width: 350px; }
+  @media screen and (max-width: 500px) {
+    body {
+      --spacing-xxxlarge: 50px;
+      --spacing-xxlarge: 40px;
+      --spacing-xlarge: 20px;
+      --spacing-large: 10px;
+      --spacing-medium: 5px;
+      --spacing-small: 2.5px;
+      --spacing-xsmall: 1px;
+      --font-size-small: 0.7rem;
+      --font-size-medium: 0.8rem;
+      --font-size-large: 1rem;
+      --font-size-xlarge: 1.3rem;
+      --font-size-xxlarge: 1.6rem;
+      --font-size-xxxlarge: 2.3rem;
+      --min-card-width: 300px; } }
+
 .dialog-overlay {
   background: rgba(0, 0, 0, 0.3);
   cursor: pointer;

@@ -6,13 +6,16 @@ export namespace BookService {
     // @todo get additional data if authenticated
     return BookRepository.getOne(id);
   };
-  export const getMany = (
-    context,
-    paginationOptions: PaginationOptions,
-    searchTerm?: string
-  ) => {
+  export const getMany = (options: {
+    paginationOptions: PaginationOptions;
+    searchTerm?: string;
+    context?: RequestContext;
+  }) => {
     // @todo get additional data if authenticated
     // @todo validate pagination options and search term
-    return BookRepository.getMany(paginationOptions, searchTerm);
+    return BookRepository.getMany(
+      options.paginationOptions,
+      options.searchTerm
+    );
   };
 }

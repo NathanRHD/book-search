@@ -7,7 +7,7 @@ export const apiSdk = {
 
     return new Promise<any>((res, rej) => {
       const request = new XMLHttpRequest();
-      request.open("GET", `/api/${paramsToPath(params)}`);
+      request.open("GET", `/api${paramsToPath(params)}`);
       request.setRequestHeader(
         "Content-Type",
         "application/json;charset=UTF-8"
@@ -17,7 +17,25 @@ export const apiSdk = {
           res(JSON.parse(this.responseText));
         }
       };
-      request.send(body);
+      request.send(JSON.stringify(body));
+    });
+  },
+  "/books": (params, body) => {
+    const paramsToPath = (params) => `/books`;
+
+    return new Promise<any>((res, rej) => {
+      const request = new XMLHttpRequest();
+      request.open("POST", `/api${paramsToPath(params)}`);
+      request.setRequestHeader(
+        "Content-Type",
+        "application/json;charset=UTF-8"
+      );
+      request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          res(JSON.parse(this.responseText));
+        }
+      };
+      request.send(JSON.stringify(body));
     });
   },
 };

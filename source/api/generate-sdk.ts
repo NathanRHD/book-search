@@ -27,7 +27,7 @@ const generateSdk = () => {
         res(JSON.parse(this.responseText));
       }
     };
-    request.send(body);
+    request.send(JSON.stringify(body));
   });
 },`
   );
@@ -35,7 +35,7 @@ const generateSdk = () => {
   const sdkString = `import * as React from "react";
 
 export const apiSdk = {
-  ${fetchersString.join("/n")}
+  ${fetchersString.join("\n")}
 }
   
 /**

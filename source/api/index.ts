@@ -8,5 +8,9 @@ console.log("CONTROLLERS", controllers);
 
 export const apiRouter = express.Router();
 _.keys(endpoints).forEach((key) => {
-  apiRouter.use(key, endpoints[key].controller);
+  // @todo make work with other verbs
+  apiRouter[endpoints[key].method === "GET" ? "get" : "post"](
+    key,
+    endpoints[key].controller
+  );
 });

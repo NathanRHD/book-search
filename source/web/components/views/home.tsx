@@ -7,14 +7,34 @@ import { LoadingSpinner } from "../loading-spinner";
 import { Card } from "../card";
 import Helmet from "react-helmet";
 import { RouteComponentProps } from "react-router";
+import { useFetch, apiSdk } from "../../api-sdk/sdk";
+import { Models } from "../../api-sdk/models";
 
 type HomeProps = {} & RouteComponentProps<{}, {}>;
 
 export const Home: React.FC<HomeProps> = (props) => {
-  // const searchResults = React.useMemo(
-  //   () => _.values(Book.repository).map((book) => <Card.Component {...book} />),
-  //   []
-  // );
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  const { isPending, response, fetch } = useFetch<Models.Book.Entity[]>(
+    apiSdk["/books"]
+  );
+
+  const [cursor, setCursor] = React.useState(undefined);
+  const [direction, setDirection] = React.useState("forward");
+
+  const pageSize = 3;
+
+  React.useEffect(() => {
+    const body = {
+      paginationOptions: {
+        direction,
+        pageSize,
+        cursor,
+      },
+      searchTerm,
+    };
+    fetch(undefined, body);
+  }, [searchTerm]);
 
   return (
     <div className="home">
@@ -26,12 +46,23 @@ export const Home: React.FC<HomeProps> = (props) => {
       <div className="header">
         <h1>Nathan's Books</h1>
         <div className="search-box">
-          <input type="text" placeholder="Search titles here..." />
+          <input
+            type="text"
+            placeholder="Search titles here..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
       <div className="main">
-        {/* <div className="search-results">{searchResults}</div> */}
-        <LoadingSpinner />
+        {!isPending && response && (
+          <div className="search-results">
+            {response.map((book) => (
+              <Card.Component {...book} key={book.id} />
+            ))}
+          </div>
+        )}
+        {isPending && <LoadingSpinner />}
         {props.children}
       </div>
     </div>
