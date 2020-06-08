@@ -7,15 +7,14 @@ import { LoadingSpinner } from "../loading-spinner";
 import { Card } from "../card";
 import Helmet from "react-helmet";
 import { RouteComponentProps } from "react-router";
-import { Book } from "../../../data/books";
 
 type HomeProps = {} & RouteComponentProps<{}, {}>;
 
-export const Home: React.FC<HomeProps> = props => {
-  const searchResults = React.useMemo(
-    () => _.values(Book.repository).map(book => <Card.Component {...book} />),
-    []
-  );
+export const Home: React.FC<HomeProps> = (props) => {
+  // const searchResults = React.useMemo(
+  //   () => _.values(Book.repository).map((book) => <Card.Component {...book} />),
+  //   []
+  // );
 
   return (
     <div className="home">
@@ -31,7 +30,7 @@ export const Home: React.FC<HomeProps> = props => {
         </div>
       </div>
       <div className="main">
-        <div className="search-results">{searchResults}</div>
+        {/* <div className="search-results">{searchResults}</div> */}
         <LoadingSpinner />
         {props.children}
       </div>

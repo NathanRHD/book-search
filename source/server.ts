@@ -1,10 +1,11 @@
-import * as express from "express"
-import { runWebServer } from "./web/server"
+import * as express from "express";
+import { clientRouter } from "./web/server";
+import { apiRouter } from "./api";
 
-const server = express()
+const app = express();
 
-const port = process.env.PORT || 4040
+const port = process.env.PORT || 4040;
 
-runWebServer(server)
-
-server.listen(port)
+app.use("/", clientRouter);
+app.use("/api", apiRouter);
+app.listen(port);
