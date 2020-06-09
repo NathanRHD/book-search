@@ -21,6 +21,21 @@
 }
 
 .loading-spinner {
+  &[data-inline="true"] {
+    svg {
+      path.gear {
+        animation-duration: 2s;
+      }
+    }
+  }
+  &[data-loading="true"] {
+    svg {
+      g.rays,
+      path.gear {
+        animation-name: spin;
+      }
+    }
+  }
   svg {
     transform-origin: center;
     animation-name: enter;
@@ -31,7 +46,6 @@
     g.rays,
     path.gear {
       transform-origin: center;
-      animation-name: spin;
       animation-iteration-count: infinite;
       animation-timing-function: linear;
     }

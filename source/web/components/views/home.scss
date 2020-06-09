@@ -70,5 +70,16 @@
       );
       grid-gap: var(--spacing-large);
     }
+
+    > .pagination-controls {
+      margin-top: var(--spacing-large);
+
+      display: flex;
+      flex-direction: row;
+
+      > .loading-spinner {
+        margin: 0 var(--spacing-medium);
+      }
+    }
   }
 }

@@ -75,6 +75,12 @@ body {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(var(--min-card-width), 1fr));
       grid-gap: var(--spacing-large); }
+    .home > .main > .pagination-controls {
+      margin-top: var(--spacing-large);
+      display: flex;
+      flex-direction: row; }
+      .home > .main > .pagination-controls > .loading-spinner {
+        margin: 0 var(--spacing-medium); }
 
 body {
   --spacing-xxxlarge: 75px;
@@ -122,6 +128,13 @@ body {
     transform: rotateY(0deg);
     opacity: 1; } }
 
+.loading-spinner[data-inline="true"] svg path.gear {
+  animation-duration: 2s; }
+
+.loading-spinner[data-loading="true"] svg g.rays,
+.loading-spinner[data-loading="true"] svg path.gear {
+  animation-name: spin; }
+
 .loading-spinner svg {
   transform-origin: center;
   animation-name: enter;
@@ -131,7 +144,6 @@ body {
   .loading-spinner svg g.rays,
   .loading-spinner svg path.gear {
     transform-origin: center;
-    animation-name: spin;
     animation-iteration-count: infinite;
     animation-timing-function: linear; }
   .loading-spinner svg g.rays {

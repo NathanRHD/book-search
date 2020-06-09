@@ -38,6 +38,10 @@ export const Home: React.FC<HomeProps> = (props) => {
     [pageSize, fetch]
   );
 
+  React.useEffect(() => {
+    fetchWithOptions(undefined);
+  }, [fetchWithOptions]);
+
   const { value: searchTerm, onChange: onSearchTermChange } = useThrottle(
     fetchWithOptions,
     1000
@@ -76,18 +80,25 @@ export const Home: React.FC<HomeProps> = (props) => {
         </div>
       </div>
       <div className="main">
-        {!isPending && response && (
+        {response && (
           <>
             <div className="search-results">
               {response.map((book) => (
                 <Card.Component {...book} key={book.id} />
               ))}
             </div>
-            <button onClick={goBack}>Back</button>
-            <button onClick={goForward}>Forward</button>
+            <div className="pagination-controls">
+              <button onClick={goBack} disabled={isPending}>
+                Back
+              </button>
+              <LoadingSpinner inline loading={isPending} />
+              <button onClick={goForward} disabled={isPending}>
+                Forward
+              </button>
+            </div>
           </>
         )}
-        {isPending && <LoadingSpinner />}
+        {isPending && !response && <LoadingSpinner loading />}
         {props.children}
       </div>
     </div>
