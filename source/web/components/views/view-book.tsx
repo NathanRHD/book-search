@@ -8,6 +8,10 @@ import Helmet from "react-helmet";
 import { Models } from "../../api-sdk/models";
 import { apiSdk, useFetch } from "../../api-sdk/sdk";
 import { LoadingSpinner } from "../loading-spinner";
+import {
+  getIconFromStatus,
+  getDescriptionFromStatus,
+} from "../../helpers/books";
 
 export namespace ViewBook {
   export type Props = {} & RouteComponentProps<{ id: string }, {}>;
@@ -23,6 +27,31 @@ export namespace ViewBook {
       React.useEffect(() => {
         fetch({ bookId: props.id }, undefined);
       }, []);
+
+      const icons = React.useMemo(() => {
+        if (response) {
+          if (response.statuses.length) {
+            return response.statuses.map((status, index) => {
+              const icon = getIconFromStatus(status);
+              const description = getDescriptionFromStatus(status);
+              return (
+                <div className="status">
+                  <i className={icon} key={index} />
+                  <p className="description">{description}</p>
+                </div>
+              );
+            });
+          }
+          return (
+            <div className="status">
+              <i className={getIconFromStatus(undefined)} />
+              <p className="description">
+                {getDescriptionFromStatus(undefined)}
+              </p>
+            </div>
+          );
+        }
+      }, [response]);
 
       // @todo error handling
       if (!isPending && !response) {
@@ -43,6 +72,8 @@ export namespace ViewBook {
               <title>{response.title}</title>
             </Helmet>
             <h2>{response.title}</h2>
+            <p className="author">{response.author}</p>
+            {icons && <div className="statuses">{icons}</div>}
           </div>
         );
       }

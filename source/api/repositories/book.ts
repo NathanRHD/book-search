@@ -68,7 +68,7 @@ export namespace BookRepository {
     10: {
       id: 10,
       title: "The Lord of the Rings: The Return of the King",
-      author: "J.R.R. Tolkein",
+      author: "J.R.R. Tolkien",
       statuses: [Models.Book.Status.Read, Models.Book.Status.Gift],
     },
   } as Dictionary<Models.Book.Entity>;
