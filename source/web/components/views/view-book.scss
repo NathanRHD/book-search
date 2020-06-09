@@ -61,5 +61,12 @@
     > h2 {
       font-size: var(--font-size-large);
     }
+
+    &.pending {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

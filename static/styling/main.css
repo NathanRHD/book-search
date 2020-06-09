@@ -493,6 +493,10 @@ body {
     padding: var(--spacing-medium); }
     .view-book > .main > h2 {
       font-size: var(--font-size-large); }
+    .view-book > .main.pending {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
 
 @keyframes rotate-in {
   0% {

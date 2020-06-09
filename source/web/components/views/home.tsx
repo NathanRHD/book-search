@@ -18,25 +18,44 @@ export const Home: React.FC<HomeProps> = (props) => {
     apiSdk["/books"]
   );
 
-  const [cursor, setCursor] = React.useState(undefined);
-  const [direction, setDirection] = React.useState("forward");
+  const cursor = React.useRef<number>(undefined);
+  const direction = React.useRef<"forward" | "backward">("forward");
 
   const pageSize = 3;
 
-  const { value: searchTerm, onChange: onSearchTermChange } = useThrottle(
-    (searchTerm) => {
+  const fetchWithOptions = React.useCallback(
+    (searchTerm: string) => {
       const body = {
         paginationOptions: {
-          direction,
+          direction: direction.current,
           pageSize,
-          cursor,
+          cursor: cursor.current,
         },
         searchTerm,
       };
       fetch(undefined, body);
     },
+    [pageSize, fetch]
+  );
+
+  const { value: searchTerm, onChange: onSearchTermChange } = useThrottle(
+    fetchWithOptions,
     1000
   );
+
+  const goForward = React.useCallback(() => {
+    direction.current = "forward";
+    cursor.current = response[response.length - 1].id;
+
+    fetchWithOptions(searchTerm);
+  }, [response, searchTerm, fetchWithOptions]);
+
+  const goBack = React.useCallback(() => {
+    direction.current = "backward";
+    cursor.current = response[0].id;
+
+    fetchWithOptions(searchTerm);
+  }, [response, searchTerm, fetchWithOptions]);
 
   return (
     <div className="home">
@@ -58,11 +77,15 @@ export const Home: React.FC<HomeProps> = (props) => {
       </div>
       <div className="main">
         {!isPending && response && (
-          <div className="search-results">
-            {response.map((book) => (
-              <Card.Component {...book} key={book.id} />
-            ))}
-          </div>
+          <>
+            <div className="search-results">
+              {response.map((book) => (
+                <Card.Component {...book} key={book.id} />
+              ))}
+            </div>
+            <button onClick={goBack}>Back</button>
+            <button onClick={goForward}>Forward</button>
+          </>
         )}
         {isPending && <LoadingSpinner />}
         {props.children}

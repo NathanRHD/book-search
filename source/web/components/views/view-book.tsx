@@ -7,6 +7,7 @@ import "./view-book.scss";
 import Helmet from "react-helmet";
 import { Models } from "../../api-sdk/models";
 import { apiSdk, useFetch } from "../../api-sdk/sdk";
+import { LoadingSpinner } from "../loading-spinner";
 
 export namespace ViewBook {
   export type Props = {} & RouteComponentProps<{ id: string }, {}>;
@@ -46,7 +47,11 @@ export namespace ViewBook {
         );
       }
 
-      return <div className="main"></div>;
+      return (
+        <div className="main pending">
+          <LoadingSpinner />
+        </div>
+      );
     };
   }
 

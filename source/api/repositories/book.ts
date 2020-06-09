@@ -74,7 +74,7 @@ export namespace BookRepository {
   } as Dictionary<Models.Book.Entity>;
 
   export const getOne = async (id: number) => {
-    await wait(1500);
+    await wait(1000);
     return repository[id];
   };
 
@@ -82,9 +82,9 @@ export namespace BookRepository {
     paginationOptions: PaginationOptions,
     searchTerm?: string
   ) => {
-    await wait(3000);
+    await wait(1000);
 
-    return _.values(repository)
+    const sorted = _.values(repository)
       .filter((book) => {
         if (searchTerm && !book.title.includes(searchTerm)) {
           return false;
@@ -94,9 +94,10 @@ export namespace BookRepository {
           ? book.id < (paginationOptions.cursor || 0)
           : book.id > (paginationOptions.cursor || 0);
       })
-      .sort((a, b) =>
-        paginationOptions.direction === "backward" ? b.id - a.id : a.id - b.id
-      )
-      .slice(0, paginationOptions.pageSize);
+      .sort((a, b) => a.id - b.id);
+
+    return paginationOptions.direction === "backward"
+      ? sorted.slice(paginationOptions.pageSize * -1)
+      : sorted.slice(0, paginationOptions.pageSize);
   };
 }
