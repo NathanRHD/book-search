@@ -49,7 +49,7 @@ export namespace ViewBook {
 
       return (
         <div className="main pending">
-          <LoadingSpinner />
+          <LoadingSpinner loading />
         </div>
       );
     };
