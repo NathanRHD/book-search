@@ -9,12 +9,11 @@ import Helmet from "react-helmet";
 import { RouteComponentProps } from "react-router";
 import { useFetch, apiSdk } from "../../api-sdk/sdk";
 import { Models } from "../../api-sdk/models";
+import { useThrottle } from "../../helpers/async-hooks";
 
 type HomeProps = {} & RouteComponentProps<{}, {}>;
 
 export const Home: React.FC<HomeProps> = (props) => {
-  const [searchTerm, setSearchTerm] = React.useState("");
-
   const { isPending, response, fetch } = useFetch<Models.Book.Entity[]>(
     apiSdk["/books"]
   );
@@ -24,17 +23,20 @@ export const Home: React.FC<HomeProps> = (props) => {
 
   const pageSize = 3;
 
-  React.useEffect(() => {
-    const body = {
-      paginationOptions: {
-        direction,
-        pageSize,
-        cursor,
-      },
-      searchTerm,
-    };
-    fetch(undefined, body);
-  }, [searchTerm]);
+  const { value: searchTerm, onChange: onSearchTermChange } = useThrottle(
+    (searchTerm) => {
+      const body = {
+        paginationOptions: {
+          direction,
+          pageSize,
+          cursor,
+        },
+        searchTerm,
+      };
+      fetch(undefined, body);
+    },
+    1000
+  );
 
   return (
     <div className="home">
@@ -50,7 +52,7 @@ export const Home: React.FC<HomeProps> = (props) => {
             type="text"
             placeholder="Search titles here..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={onSearchTermChange}
           />
         </div>
       </div>
