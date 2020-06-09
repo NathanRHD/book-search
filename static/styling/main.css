@@ -508,8 +508,7 @@ body {
     .view-book > .main > .statuses {
       float: right;
       display: flex;
-      flex-direction: column;
-      padding: var(--spacing-large); }
+      flex-direction: column; }
       .view-book > .main > .statuses > .status {
         text-align: center;
         margin-bottom: var(--spacing-large); }
