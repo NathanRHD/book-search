@@ -57,18 +57,13 @@
   > .main {
     flex-grow: 1;
     padding: var(--spacing-medium);
-    position: relative;
-    top: 0;
-    left: 0;
 
     > h2 {
       font-size: var(--font-size-large);
     }
 
     > .statuses {
-      position: absolute;
-      top: 0;
-      right: 0;
+      float: right;
 
       display: flex;
       flex-direction: column;

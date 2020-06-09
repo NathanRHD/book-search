@@ -71,9 +71,9 @@ export namespace ViewBook {
             <Helmet>
               <title>{response.title}</title>
             </Helmet>
+            {icons && <div className="statuses">{icons}</div>}
             <h2>{response.title}</h2>
             <p className="author">{response.author}</p>
-            {icons && <div className="statuses">{icons}</div>}
           </div>
         );
       }

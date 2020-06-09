@@ -502,16 +502,11 @@ body {
         display: none; } }
   .view-book > .main {
     flex-grow: 1;
-    padding: var(--spacing-medium);
-    position: relative;
-    top: 0;
-    left: 0; }
+    padding: var(--spacing-medium); }
     .view-book > .main > h2 {
       font-size: var(--font-size-large); }
     .view-book > .main > .statuses {
-      position: absolute;
-      top: 0;
-      right: 0;
+      float: right;
       display: flex;
       flex-direction: column;
       padding: var(--spacing-large); }
