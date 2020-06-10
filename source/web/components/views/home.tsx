@@ -21,7 +21,7 @@ export const Home: React.FC<HomeProps> = (props) => {
   const cursor = React.useRef<number>(undefined);
   const direction = React.useRef<"forward" | "backward">("forward");
 
-  const pageSize = 3;
+  const pageSize = 6;
 
   const fetchWithOptions = React.useCallback(
     (searchTerm: string) => {

@@ -18,6 +18,8 @@ $dialog-height: 600px;
   align-items: center;
   justify-content: center;
 
+  z-index: 2;
+
   @media screen and (max-width: $dialog-width),
     screen and (max-height: $dialog-height) {
     cursor: auto;

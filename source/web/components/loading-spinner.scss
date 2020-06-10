@@ -22,7 +22,8 @@
 .loading-spinner {
   height: 300px;
   &[data-inline="true"] {
-    height: 40px;
+    height: var(--font-size-large);
+    display: inline;
     svg {
       path.gear {
         &.big {
@@ -31,6 +32,7 @@
         }
         &.small {
           animation-duration: 1.5s;
+          animation-direction: normal;
           transform-origin: 45px 38px;
         }
       }

@@ -1,5 +1,20 @@
 @import "../../theme/variables.scss";
 
+@keyframes enter-card {
+  0% {
+    opacity: 0;
+    transform: translate3d(
+      calc(var(--spacing-large) * -1),
+      calc(var(--spacing-large) * -1),
+      calc(var(--spacing-large) * -1)
+    );
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .home {
   display: flex;
   flex-direction: column;
@@ -16,6 +31,8 @@
     padding-bottom: 0;
 
     box-shadow: $standard-box-shadow;
+
+    z-index: 1;
 
     > h1 {
       color: white;
@@ -69,10 +86,25 @@
         minmax(var(--min-card-width), 1fr)
       );
       grid-gap: var(--spacing-large);
+
+      .card {
+        $entry-duration: 0.25s;
+
+        animation-fill-mode: both;
+        animation-duration: $entry-duration;
+        animation-name: enter-card;
+
+        // 6 is the page size
+        @for $i from 1 through 6 {
+          &:nth-child(#{$i}) {
+            animation-delay: ($i - 1) * $entry-duration;
+          }
+        }
+      }
     }
 
     > .pagination-controls {
-      margin-top: var(--spacing-large);
+      margin-top: var(--spacing-xlarge);
 
       display: flex;
       flex-direction: row;
