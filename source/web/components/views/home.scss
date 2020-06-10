@@ -93,7 +93,7 @@
         // 6 is the page size
         @for $i from 1 through 6 {
           &:nth-child(#{$i}) {
-            animation-delay: ($i - 1) * $entry-duration;
+            animation-delay: ($i - 1) * $entry-duration * 0.5;
           }
         }
       }
