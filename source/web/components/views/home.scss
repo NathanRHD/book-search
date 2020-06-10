@@ -3,11 +3,7 @@
 @keyframes enter-card {
   0% {
     opacity: 0;
-    transform: translate3d(
-      calc(var(--spacing-large) * -1),
-      calc(var(--spacing-large) * -1),
-      calc(var(--spacing-large) * -1)
-    );
+    transform: translate3d(calc(var(--spacing-medium) * -1), 0, 0);
   }
   100% {
     opacity: 1;
