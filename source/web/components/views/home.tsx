@@ -88,11 +88,19 @@ export const Home: React.FC<HomeProps> = (props) => {
               ))}
             </div>
             <div className="pagination-controls">
-              <button onClick={goBack} disabled={isPending}>
+              <button
+                className="secondary"
+                onClick={goBack}
+                disabled={isPending}
+              >
                 Back
               </button>
               <LoadingSpinner inline loading={isPending} />
-              <button onClick={goForward} disabled={isPending}>
+              <button
+                className="secondary"
+                onClick={goForward}
+                disabled={isPending}
+              >
                 Forward
               </button>
             </div>

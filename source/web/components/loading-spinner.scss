@@ -16,17 +16,30 @@
   }
   to {
     transform: rotateY(0deg);
-    opacity: 1;
   }
 }
 
 .loading-spinner {
+  height: 300px;
   &[data-inline="true"] {
+    height: 40px;
     svg {
       path.gear {
-        animation-duration: 2s;
+        &.big {
+          animation-duration: 2s;
+          transform-origin: 20px 20px;
+        }
+        &.small {
+          animation-duration: 1.5s;
+          transform-origin: 45px 38px;
+        }
       }
     }
+  }
+
+  transition: opacity 0.25s;
+  &[data-loading="false"] {
+    opacity: 0.25;
   }
   &[data-loading="true"] {
     svg {
@@ -37,6 +50,9 @@
     }
   }
   svg {
+    height: 100%;
+    width: auto;
+
     transform-origin: center;
     animation-name: enter;
     animation-timing-function: linear;

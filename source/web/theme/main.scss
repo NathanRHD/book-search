@@ -75,6 +75,39 @@ table {
   }
 }
 
+button {
+  cursor: pointer;
+
+  border: 1px solid;
+  border-radius: var(--spacing-small);
+  padding: var(--spacing-medium);
+
+  font-size: var(--font-size-medium);
+
+  background: $gray-dark-gradient;
+  border-color: $gray-x-dark;
+  color: white;
+
+  transition: opacity 0.25s;
+
+  &.secondary {
+    background: $gold-gradient;
+    text-shadow: 1px 1px $gold-dark;
+    border-color: $gold-dark;
+  }
+
+  &.primary {
+    background: $red-gradient;
+    text-shadow: 1px 1px $red-dark;
+    border-color: $red-dark;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
+}
+
 @media (max-width: 950px) {
   body,
   #root {

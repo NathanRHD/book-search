@@ -78,9 +78,15 @@ body {
     .home > .main > .pagination-controls {
       margin-top: var(--spacing-large);
       display: flex;
-      flex-direction: row; }
+      flex-direction: row;
+      align-items: center;
+      width: 250px; }
+      .home > .main > .pagination-controls > button {
+        flex-basis: 0;
+        flex-grow: 1; }
       .home > .main > .pagination-controls > .loading-spinner {
-        margin: 0 var(--spacing-medium); }
+        height: 60px;
+        margin: 0 var(--spacing-large); }
 
 body {
   --spacing-xxxlarge: 75px;
@@ -125,32 +131,42 @@ body {
     transform: rotateY(-90deg);
     opacity: 0; }
   to {
-    transform: rotateY(0deg);
-    opacity: 1; } }
+    transform: rotateY(0deg); } }
 
-.loading-spinner[data-inline="true"] svg path.gear {
-  animation-duration: 2s; }
-
-.loading-spinner[data-loading="true"] svg g.rays,
-.loading-spinner[data-loading="true"] svg path.gear {
-  animation-name: spin; }
-
-.loading-spinner svg {
-  transform-origin: center;
-  animation-name: enter;
-  animation-timing-function: linear;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards; }
-  .loading-spinner svg g.rays,
-  .loading-spinner svg path.gear {
+.loading-spinner {
+  height: 300px;
+  transition: opacity 0.25s; }
+  .loading-spinner[data-inline="true"] {
+    height: 40px; }
+    .loading-spinner[data-inline="true"] svg path.gear.big {
+      animation-duration: 2s;
+      transform-origin: 20px 20px; }
+    .loading-spinner[data-inline="true"] svg path.gear.small {
+      animation-duration: 1.5s;
+      transform-origin: 45px 38px; }
+  .loading-spinner[data-loading="false"] {
+    opacity: 0.25; }
+  .loading-spinner[data-loading="true"] svg g.rays,
+  .loading-spinner[data-loading="true"] svg path.gear {
+    animation-name: spin; }
+  .loading-spinner svg {
+    height: 100%;
+    width: auto;
     transform-origin: center;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; }
-  .loading-spinner svg g.rays {
-    animation-duration: 15s; }
-  .loading-spinner svg path.gear {
-    animation-duration: 25s;
-    animation-direction: reverse; }
+    animation-name: enter;
+    animation-timing-function: linear;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards; }
+    .loading-spinner svg g.rays,
+    .loading-spinner svg path.gear {
+      transform-origin: center;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear; }
+    .loading-spinner svg g.rays {
+      animation-duration: 15s; }
+    .loading-spinner svg path.gear {
+      animation-duration: 25s;
+      animation-direction: reverse; }
 
 body {
   --spacing-xxxlarge: 75px;
@@ -632,6 +648,28 @@ table {
     padding: var(--spacing-medium); }
   table tr.emphasis {
     font-weight: 400; }
+
+button {
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: var(--spacing-small);
+  padding: var(--spacing-medium);
+  font-size: var(--font-size-medium);
+  background: linear-gradient(90deg, #212121, #454545);
+  border-color: #212121;
+  color: white;
+  transition: opacity 0.25s; }
+  button.secondary {
+    background: linear-gradient(90deg, #997300, #ffcc33);
+    text-shadow: 1px 1px #997300;
+    border-color: #997300; }
+  button.primary {
+    background: linear-gradient(90deg, #a01c1c, #ff7575);
+    text-shadow: 1px 1px #a01c1c;
+    border-color: #a01c1c; }
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.25; }
 
 @media (max-width: 950px) {
   body,
