@@ -9,7 +9,8 @@
     "serve": "node distribution/server.js",
     "start": "node distribution/server.js",
     "start:dev": "node -r dotenv/config distribution/server.js",
-    "generate-sdk": "ts-node source/api/generate-sdk.ts"
+    "generate-sdk": "ts-node source/api/generate-sdk.ts",
+    "db-dump:dev": "pg_dump nathans-books > dump.sql"
   },
   "repository": {
     "type": "git",
