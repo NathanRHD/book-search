@@ -1,6 +1,25 @@
 import * as React from "react";
 
 export const apiSdk = {
+  "/book": (params, body) => {
+    const paramsToPath = (params) => `/book`;
+
+    return new Promise<any>((res, rej) => {
+      const request = new XMLHttpRequest();
+      request.open("POST", `/api${paramsToPath(params)}`);
+      request.setRequestHeader(
+        "Content-Type",
+        "application/json;charset=UTF-8"
+      );
+      request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          res(JSON.parse(this.responseText));
+        }
+      };
+      request.send(JSON.stringify(body));
+    });
+  },
+
   "/book/:bookId": (params, body) => {
     const paramsToPath = (params) =>
       `/book/${params ? params["bookId"] : ":bookId"}`;
@@ -20,8 +39,9 @@ export const apiSdk = {
       request.send(JSON.stringify(body));
     });
   },
-  "/books": (params, body) => {
-    const paramsToPath = (params) => `/books`;
+
+  "/books/search": (params, body) => {
+    const paramsToPath = (params) => `/books/search`;
 
     return new Promise<any>((res, rej) => {
       const request = new XMLHttpRequest();

@@ -14,14 +14,15 @@ import { useThrottle } from "../../helpers/async-hooks";
 type HomeProps = {} & RouteComponentProps<{}, {}>;
 
 export const Home: React.FC<HomeProps> = (props) => {
-  const { isPending, response, fetch } = useFetch<Models.Book.Entity[]>(
-    apiSdk["/books"]
-  );
+  const { isPending, response, fetch } = useFetch<{
+    books: Models.Book.Entity[];
+    finalPage: boolean;
+  }>(apiSdk["/books/search"]);
 
   const cursor = React.useRef<number>(undefined);
   const direction = React.useRef<"forward" | "backward">("forward");
 
-  const pageSize = 6;
+  const pageSize = 1;
 
   const fetchWithOptions = React.useCallback(
     (searchTerm: string) => {
@@ -49,14 +50,14 @@ export const Home: React.FC<HomeProps> = (props) => {
 
   const goForward = React.useCallback(() => {
     direction.current = "forward";
-    cursor.current = response[response.length - 1].id;
+    cursor.current = response.books[response.books.length - 1].id;
 
     fetchWithOptions(searchTerm);
   }, [response, searchTerm, fetchWithOptions]);
 
   const goBack = React.useCallback(() => {
     direction.current = "backward";
-    cursor.current = response[0].id;
+    cursor.current = response.books[0].id;
 
     fetchWithOptions(searchTerm);
   }, [response, searchTerm, fetchWithOptions]);
@@ -83,7 +84,7 @@ export const Home: React.FC<HomeProps> = (props) => {
         {response && (
           <>
             <div className="search-results">
-              {response.map((book) => (
+              {response.books.map((book) => (
                 <Card.Component {...book} key={book.id} />
               ))}
             </div>
@@ -91,7 +92,10 @@ export const Home: React.FC<HomeProps> = (props) => {
               <button
                 className="secondary"
                 onClick={goBack}
-                disabled={isPending}
+                disabled={
+                  isPending ||
+                  (direction.current === "backward" && response.finalPage)
+                }
               >
                 Back
               </button>
@@ -99,7 +103,10 @@ export const Home: React.FC<HomeProps> = (props) => {
               <button
                 className="secondary"
                 onClick={goForward}
-                disabled={isPending}
+                disabled={
+                  isPending ||
+                  (direction.current === "forward" && response.finalPage)
+                }
               >
                 Forward
               </button>

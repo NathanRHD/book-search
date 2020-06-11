@@ -4,100 +4,84 @@ import { Dictionary } from "underscore";
 import { wait } from "../helpers";
 import { Models } from "../models";
 import { PaginationOptions } from "../typings";
+import { getConnection, Brackets } from "typeorm";
+import { Book } from "./entity";
 
 export namespace BookRepository {
-  const repository = {
-    1: {
-      id: 1,
-      title: "The State and Revolution",
-      author: "V.I. Lenin",
-      statuses: [Models.Book.Status.Reading],
-    },
-    2: {
-      id: 2,
-      title: "The Colour of Magic",
-      author: "Terry Pratchett",
-      statuses: [Models.Book.Status.Read, Models.Book.Status.Gift],
-    },
-    3: {
-      id: 3,
-      title: "The Lord of the Rings: The Fellowship of the Ring",
-      author: "J.R.R. Tolkien",
-      statuses: [Models.Book.Status.Read, Models.Book.Status.Gift],
-    },
-    4: {
-      id: 4,
-      title: "V for Vendetta",
-      author: "Alan Moore & David Lloyd",
-      statuses: [],
-    },
-    5: {
-      id: 5,
-      title: "The Light Fantastic",
-      author: "Terry Pratchett",
-      statuses: [Models.Book.Status.Read, Models.Book.Status.Gift],
-    },
-    6: {
-      id: 6,
-      title: "The Making of the English Working Class",
-      author: "E.P. Thompson",
-      statuses: [Models.Book.Status.Reading],
-    },
-    7: {
-      id: 7,
-      title: "The ABC of Chairmanship",
-      author: "Walter Citrine",
-      statuses: [Models.Book.Status.Read, Models.Book.Status.Lending],
-    },
-    8: {
-      id: 8,
-      title: "Blackshirts & Reds",
-      author: "Michael Parenti",
-      statuses: [Models.Book.Status.Reading, Models.Book.Status.Borrowing],
-    },
-    9: {
-      id: 9,
-      title: "The Lord of the Rings: The Two Towers",
-      author: "J.R.R. Tolkien",
-      statuses: [
-        Models.Book.Status.Read,
-        Models.Book.Status.Reading,
-        Models.Book.Status.Gift,
-      ],
-    },
-    10: {
-      id: 10,
-      title: "The Lord of the Rings: The Return of the King",
-      author: "J.R.R. Tolkien",
-      statuses: [Models.Book.Status.Read, Models.Book.Status.Gift],
-    },
-  } as Dictionary<Models.Book.Entity>;
+  export const create = async (book) => {
+    const connection = getConnection();
 
+    const entity = await connection.getRepository(Book).create();
+    entity.title = book.title;
+    entity.subtitle = book.subtitle;
+    entity.author = book.author;
+    entity.statuses = [];
+
+    const createdBook = await entity.save();
+
+    return createdBook;
+  };
   export const getOne = async (id: number) => {
+    const connection = getConnection();
+    const book = await connection.getRepository(Book).findOne(id, {
+      relations: ["statuses"],
+    });
+
     await wait(1000);
-    return repository[id];
+
+    return book;
   };
 
   export const getMany = async (
     paginationOptions: PaginationOptions,
     searchTerm?: string
   ) => {
+    const connection = getConnection();
+    let qb = connection.getRepository(Book).createQueryBuilder().select();
+
+    if (searchTerm) {
+      qb.where(
+        new Brackets((qb2) => {
+          qb2
+            .where("title ILIKE :searchTerm", {
+              searchTerm: `%${searchTerm}%`,
+            })
+            .orWhere("title ILIKE :searchTerm", {
+              searchTerm: `%${searchTerm}%`,
+            })
+            .orWhere("author ILIKE :searchTerm", {
+              searchTerm: `%${searchTerm}%`,
+            });
+        })
+      );
+    }
+
+    if (paginationOptions.cursor) {
+      let cursorOperator =
+        paginationOptions.direction === "backward" ? "<" : ">";
+
+      if (paginationOptions.inclusive) {
+        cursorOperator = cursorOperator + "=";
+      }
+
+      qb.andWhere(`Book.id ${cursorOperator} :cursor`, {
+        cursor: paginationOptions.cursor,
+      });
+    }
+
+    const booksRemaining = await qb.getCount();
+
+    const finalPage = booksRemaining <= paginationOptions.pageSize;
+
+    const books = await qb
+      .take(paginationOptions.pageSize)
+      .leftJoinAndSelect("Book.statuses", "Status")
+      .getMany();
+
+    console.log("BOOKS", books);
+
     await wait(1000);
 
-    const sorted = _.values(repository)
-      .filter((book) => {
-        if (searchTerm && !book.title.includes(searchTerm)) {
-          return false;
-        }
-
-        return paginationOptions.direction === "backward"
-          ? book.id < (paginationOptions.cursor || 0)
-          : book.id > (paginationOptions.cursor || 0);
-      })
-      .sort((a, b) => a.id - b.id);
-
-    return paginationOptions.direction === "backward"
-      ? sorted.slice(paginationOptions.pageSize * -1)
-      : sorted.slice(0, paginationOptions.pageSize);
+    return { books, finalPage };
   };
 }

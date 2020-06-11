@@ -17,6 +17,10 @@ export type RequestContext = {
 
 export type PaginationOptions = {
   cursor?: number;
+
+  // if true, the page should include the cursor entity
+  inclusive?: boolean;
+
   pageSize: number;
   direction: "backward" | "forward";
 };
