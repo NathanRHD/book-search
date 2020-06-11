@@ -1,4 +1,4 @@
-import { BookRepository } from "../repositories/book";
+import { BookRepository } from "./repository";
 import { PaginationOptions, RequestContext } from "../typings";
 
 export namespace BookService {

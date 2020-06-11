@@ -6,7 +6,7 @@ import * as PostgressConnectionStringParser from "pg-connection-string";
 import "reflect-metadata";
 
 import { endpoints } from "./endpoints";
-import * as controllers from "./controllers/.";
+import * as controllers from "./controllers";
 
 console.log("CONTROLLERS", controllers);
 

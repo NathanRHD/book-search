@@ -1,7 +1,7 @@
-import { registerEndpoints } from "../endpoints";
-import { BookService } from "../services/book";
-
 import * as Express from "express";
+
+import { registerEndpoints } from "../endpoints";
+import { BookService } from "./service";
 
 export namespace BookController {
   const getOne = async (req: Express.Request, res: Express.Response) => {

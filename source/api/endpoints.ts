@@ -1,5 +1,4 @@
 import * as Express from "express";
-import { basePath } from "./config";
 
 export const endpoints = {};
 
