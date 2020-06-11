@@ -7,7 +7,9 @@
     "webpack": "webpack --mode development --config ./webpack.config.js",
     "build": "npm run webpack && cp distribution/web.js static/scripts/bundle.js && cp distribution/web.css static/styling/main.css",
     "serve": "node distribution/server.js",
-    "start": "npm run serve"
+    "start": "node distribution/server.js",
+    "start:dev": "node -r dotenv/config distribution/server.js",
+    "generate-sdk": "ts-node source/api/generate-sdk.ts"
   },
   "repository": {
     "type": "git",
@@ -16,8 +18,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^14.0.13",
     "body-parser": "^1.19.0",
+    "dns": "^0.2.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "pg": "^8.2.1",
+    "pg-native": "^3.0.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-helmet": "^5.2.1",
@@ -25,6 +32,9 @@
     "react-router": "^3",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.10.2",
+    "typeorm": "^0.2.25",
     "underscore": "^1.10.2"
   },
   "devDependencies": {
