@@ -74,6 +74,10 @@ export namespace BookRepository {
     const finalPage = booksRemaining <= paginationOptions.pageSize;
 
     const books = await qb
+      .orderBy(
+        "Book.id",
+        paginationOptions.direction === "forward" ? "ASC" : "DESC"
+      )
       .take(paginationOptions.pageSize)
       .leftJoinAndSelect("Book.statuses", "Status")
       .getMany();
