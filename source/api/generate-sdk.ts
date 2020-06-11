@@ -1,4 +1,4 @@
-import * as controllers from "./controllers/.";
+import * as controllers from "./controllers";
 import { endpoints } from "./endpoints";
 import { basePath } from "./config";
 
