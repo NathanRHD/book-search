@@ -6,9 +6,10 @@ import {
   ManyToMany,
 } from "typeorm";
 import { Book } from "../book/entity";
+import { Models } from "../typings";
 
 @Entity()
-export class Status extends BaseEntity {
+export class Status extends BaseEntity implements Models.Status {
   @PrimaryGeneratedColumn()
   id: number;
 

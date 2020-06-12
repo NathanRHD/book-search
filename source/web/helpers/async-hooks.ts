@@ -1,10 +1,5 @@
 import * as React from "react";
-
-export const wait = (ms: number) => {
-  return new Promise<void>((res) => {
-    setTimeout(() => res(), ms);
-  });
-};
+import { wait } from "../api-sdk/sdk";
 
 export const useThrottle = <Response>(
   callback: (value: string) => void,

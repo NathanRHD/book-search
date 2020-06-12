@@ -1,8 +1,6 @@
 import * as _ from "underscore";
 
-import { Dictionary } from "underscore";
 import { wait } from "../helpers";
-import { Models } from "../models";
 import { PaginationOptions } from "../typings";
 import { getConnection, Brackets } from "typeorm";
 import { Book } from "./entity";
@@ -26,8 +24,6 @@ export namespace BookRepository {
     const book = await connection.getRepository(Book).findOne(id, {
       relations: ["statuses"],
     });
-
-    await wait(1000);
 
     return book;
   };
@@ -91,8 +87,6 @@ export namespace BookRepository {
       .getMany();
 
     const books = response.sort((a, b) => a.id - b.id);
-
-    await wait(1000);
 
     return { books, firstPage, finalPage };
   };

@@ -86,20 +86,26 @@ body {
       grid-gap: var(--spacing-large); }
       .home > .main > .search-results .card {
         animation-fill-mode: both;
-        animation-duration: 0.25s;
+        animation-duration: 0.125s;
         animation-name: enter-card; }
         .home > .main > .search-results .card:nth-child(1) {
           animation-delay: 0s; }
         .home > .main > .search-results .card:nth-child(2) {
-          animation-delay: 0.125s; }
+          animation-delay: 0.0625s; }
         .home > .main > .search-results .card:nth-child(3) {
-          animation-delay: 0.25s; }
+          animation-delay: 0.125s; }
         .home > .main > .search-results .card:nth-child(4) {
-          animation-delay: 0.375s; }
+          animation-delay: 0.1875s; }
         .home > .main > .search-results .card:nth-child(5) {
-          animation-delay: 0.5s; }
+          animation-delay: 0.25s; }
         .home > .main > .search-results .card:nth-child(6) {
-          animation-delay: 0.625s; }
+          animation-delay: 0.3125s; }
+        .home > .main > .search-results .card:nth-child(7) {
+          animation-delay: 0.375s; }
+        .home > .main > .search-results .card:nth-child(8) {
+          animation-delay: 0.4375s; }
+        .home > .main > .search-results .card:nth-child(9) {
+          animation-delay: 0.5s; }
     .home > .main > .pagination-controls {
       margin-top: var(--spacing-xlarge);
       display: flex;

@@ -7,7 +7,7 @@ const generateSdk = () => {
   console.log("CONTROLLERS", controllers);
 
   const fetcherKeys = Object.keys(endpoints);
-  // @todo generate a fully typed sdk, probably replacing the function toString with something a lot cleaner, moving all entity typings to a single file (that can be copied to the client alongside the sdk) and naming them by convention
+  // @todo generate a fully typed sdk, probably replacing the function toString with something a lot cleaner, and naming typings by convention
   const fetchersString = fetcherKeys.map(
     (key, index) => `
 "${key}": (params, body) => {
@@ -37,6 +37,12 @@ const generateSdk = () => {
 export const apiSdk = {
   ${fetchersString.join("\n")}
 }
+
+export const wait = (ms: number) => {
+  return new Promise<void>((res) => {
+    setTimeout(() => res(), ms);
+  });
+};
   
 /**
  *
@@ -48,10 +54,16 @@ export const useFetch = <Response>(
   const [isPending, setIsPending] = React.useState(undefined);
   const [response, setResponse] = React.useState<Response>(undefined);
 
-  const fetch = React.useCallback(async (params, body) => {
+  const fetch = React.useCallback(async (params, body, ms?: number) => {
     setIsPending(true);
     try {
-      const response = await fetcher(params, body);
+      const promises: Array<Promise<any>> = [fetcher(params, body)];
+
+      if (ms) {
+        promises.push(wait(ms));
+      }
+
+      const [response] = await Promise.all(promises);
       setIsPending(false);
       setResponse(response);
     } catch (e) {

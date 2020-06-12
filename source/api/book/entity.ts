@@ -7,9 +7,10 @@ import {
   JoinTable,
 } from "typeorm";
 import { Status } from "../status/entity";
+import { Models } from "../typings";
 
 @Entity()
-export class Book extends BaseEntity {
+export class Book extends BaseEntity implements Models.Book {
   @PrimaryGeneratedColumn()
   id: number;
 

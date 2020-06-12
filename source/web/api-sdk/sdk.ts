@@ -60,6 +60,12 @@ export const apiSdk = {
   },
 };
 
+export const wait = (ms: number) => {
+  return new Promise<void>((res) => {
+    setTimeout(() => res(), ms);
+  });
+};
+
 /**
  *
  * @param fetcher This value should never change, perhaps it ought to be used only from within a closure?
@@ -70,10 +76,18 @@ export const useFetch = <Response>(
   const [isPending, setIsPending] = React.useState(undefined);
   const [response, setResponse] = React.useState<Response>(undefined);
 
-  const fetch = React.useCallback(async (params, body) => {
+  const fetch = React.useCallback(async (params, body, ms?: number) => {
     setIsPending(true);
     try {
-      const response = await fetcher(params, body);
+      const promises: Array<Promise<any>> = [fetcher(params, body)];
+
+      if (ms) {
+        promises.push(wait(ms));
+      }
+
+      console.log("PROMISES", promises);
+
+      const [response] = await Promise.all(promises);
       setIsPending(false);
       setResponse(response);
     } catch (e) {

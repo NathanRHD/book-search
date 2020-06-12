@@ -30,11 +30,13 @@ export namespace BookController {
     // @todo validate pagination options and search term
     const { paginationOptions, searchTerm } = req.body;
 
-    const response = await BookService.getMany({
-      paginationOptions,
-      searchTerm,
-      context: req["context"],
-    });
+    const response = await BookService.getMany(
+      {
+        paginationOptions,
+        searchTerm,
+      },
+      req["context"]
+    );
 
     res.status(200).send(JSON.stringify(response));
   };
