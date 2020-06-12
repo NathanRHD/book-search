@@ -51,7 +51,9 @@ const init = async () => {
       entities: [Book, Status],
       ...getConnectionOptions(),
     });
-    await connection.synchronize();
+    if (process.env.ENV_NAME === "dev") {
+      await connection.synchronize();
+    }
 
     _.keys(endpoints).forEach((key) => {
       // @todo make work with other verbs
