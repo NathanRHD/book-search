@@ -1,6 +1,25 @@
 import * as React from "react";
 
 export const apiSdk = {
+  "/book": (params, body) => {
+    const paramsToPath = (params) => `/book`;
+
+    return new Promise<any>((res, rej) => {
+      const request = new XMLHttpRequest();
+      request.open("POST", `/api${paramsToPath(params)}`);
+      request.setRequestHeader(
+        "Content-Type",
+        "application/json;charset=UTF-8"
+      );
+      request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          res(JSON.parse(this.responseText));
+        }
+      };
+      request.send(JSON.stringify(body));
+    });
+  },
+
   "/book/:bookId": (params, body) => {
     const paramsToPath = (params) =>
       `/book/${params ? params["bookId"] : ":bookId"}`;
@@ -20,8 +39,9 @@ export const apiSdk = {
       request.send(JSON.stringify(body));
     });
   },
-  "/books": (params, body) => {
-    const paramsToPath = (params) => `/books`;
+
+  "/books/search": (params, body) => {
+    const paramsToPath = (params) => `/books/search`;
 
     return new Promise<any>((res, rej) => {
       const request = new XMLHttpRequest();
@@ -40,6 +60,12 @@ export const apiSdk = {
   },
 };
 
+export const wait = (ms: number) => {
+  return new Promise<void>((res) => {
+    setTimeout(() => res(), ms);
+  });
+};
+
 /**
  *
  * @param fetcher This value should never change, perhaps it ought to be used only from within a closure?
@@ -50,10 +76,18 @@ export const useFetch = <Response>(
   const [isPending, setIsPending] = React.useState(undefined);
   const [response, setResponse] = React.useState<Response>(undefined);
 
-  const fetch = React.useCallback(async (params, body) => {
+  const fetch = React.useCallback(async (params, body, ms?: number) => {
     setIsPending(true);
     try {
-      const response = await fetcher(params, body);
+      const promises: Array<Promise<any>> = [fetcher(params, body)];
+
+      if (ms) {
+        promises.push(wait(ms));
+      }
+
+      console.log("PROMISES", promises);
+
+      const [response] = await Promise.all(promises);
       setIsPending(false);
       setResponse(response);
     } catch (e) {

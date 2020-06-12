@@ -8,23 +8,23 @@ import { Card } from "../card";
 import Helmet from "react-helmet";
 import { RouteComponentProps } from "react-router";
 import { useFetch, apiSdk } from "../../api-sdk/sdk";
-import { Models } from "../../api-sdk/models";
+import { Endpoints } from "../../api-sdk/typings";
 import { useThrottle } from "../../helpers/async-hooks";
 
 type HomeProps = {} & RouteComponentProps<{}, {}>;
 
 export const Home: React.FC<HomeProps> = (props) => {
-  const { isPending, response, fetch } = useFetch<Models.Book.Entity[]>(
-    apiSdk["/books"]
-  );
+  const { isPending, response, fetch } = useFetch<
+    Endpoints.Book.GetMany.Response
+  >(apiSdk["/books/search"]);
 
   const cursor = React.useRef<number>(undefined);
   const direction = React.useRef<"forward" | "backward">("forward");
 
-  const pageSize = 6;
+  const pageSize = 9;
 
   const fetchWithOptions = React.useCallback(
-    (searchTerm: string) => {
+    (searchTerm: string, ms?: number) => {
       const body = {
         paginationOptions: {
           direction: direction.current,
@@ -33,33 +33,43 @@ export const Home: React.FC<HomeProps> = (props) => {
         },
         searchTerm,
       };
-      fetch(undefined, body);
+      fetch(undefined, body, ms);
     },
-    [pageSize, fetch]
+    []
   );
 
   React.useEffect(() => {
-    fetchWithOptions(undefined);
-  }, [fetchWithOptions]);
+    fetchWithOptions(undefined, 1000);
+  }, []);
 
-  const { value: searchTerm, onChange: onSearchTermChange } = useThrottle(
-    fetchWithOptions,
+  const { value: searchTerm, onChange: onThrottleChange } = useThrottle(
+    (searchTerm) => fetchWithOptions(searchTerm, 500),
     1000
+  );
+
+  const onSearchTermChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      cursor.current = undefined;
+      direction.current = "forward";
+
+      onThrottleChange(e);
+    },
+    [onThrottleChange]
   );
 
   const goForward = React.useCallback(() => {
     direction.current = "forward";
-    cursor.current = response[response.length - 1].id;
+    cursor.current = response.books[response.books.length - 1].id;
 
-    fetchWithOptions(searchTerm);
-  }, [response, searchTerm, fetchWithOptions]);
+    fetchWithOptions(searchTerm, 500);
+  }, [response, searchTerm]);
 
   const goBack = React.useCallback(() => {
     direction.current = "backward";
-    cursor.current = response[0].id;
+    cursor.current = response.books[0].id;
 
-    fetchWithOptions(searchTerm);
-  }, [response, searchTerm, fetchWithOptions]);
+    fetchWithOptions(searchTerm, 500);
+  }, [response, searchTerm]);
 
   return (
     <div className="home">
@@ -83,7 +93,7 @@ export const Home: React.FC<HomeProps> = (props) => {
         {response && (
           <>
             <div className="search-results">
-              {response.map((book) => (
+              {response.books.map((book) => (
                 <Card.Component {...book} key={book.id} />
               ))}
             </div>
@@ -91,7 +101,7 @@ export const Home: React.FC<HomeProps> = (props) => {
               <button
                 className="secondary"
                 onClick={goBack}
-                disabled={isPending}
+                disabled={isPending || response.firstPage}
               >
                 Back
               </button>
@@ -99,7 +109,7 @@ export const Home: React.FC<HomeProps> = (props) => {
               <button
                 className="secondary"
                 onClick={goForward}
-                disabled={isPending}
+                disabled={isPending || response.finalPage}
               >
                 Forward
               </button>

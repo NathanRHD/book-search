@@ -84,16 +84,16 @@
       grid-gap: var(--spacing-large);
 
       .card {
-        $entry-duration: 0.25s;
+        $entry-duration: 0.125s;
 
         animation-fill-mode: both;
         animation-duration: $entry-duration;
         animation-name: enter-card;
 
-        // 6 is the page size
-        @for $i from 1 through 6 {
+        // 9 is the page size
+        @for $i from 1 through 9 {
           &:nth-child(#{$i}) {
-            animation-delay: ($i - 1) * $entry-duration;
+            animation-delay: ($i - 1) * $entry-duration * 0.5;
           }
         }
       }

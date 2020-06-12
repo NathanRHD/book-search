@@ -1,3 +1,4 @@
 node_modules
 .vscode
 distribution
+dump.sql
