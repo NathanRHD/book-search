@@ -56,6 +56,8 @@ export namespace BookRepository {
       );
     }
 
+    const totalSearchedBooks = await qb.getCount();
+
     if (paginationOptions.cursor) {
       let cursorOperator =
         paginationOptions.direction === "backward" ? "<" : ">";
@@ -71,9 +73,15 @@ export namespace BookRepository {
 
     const booksRemaining = await qb.getCount();
 
-    const finalPage = booksRemaining <= paginationOptions.pageSize;
+    const noBooksBehind = !(totalSearchedBooks - booksRemaining);
+    const noBooksAhead = booksRemaining <= paginationOptions.pageSize;
 
-    const books = await qb
+    const firstPage =
+      paginationOptions.direction === "forward" ? noBooksBehind : noBooksAhead;
+    const finalPage =
+      paginationOptions.direction === "forward" ? noBooksAhead : noBooksBehind;
+
+    const response = await qb
       .orderBy(
         "Book.id",
         paginationOptions.direction === "forward" ? "ASC" : "DESC"
@@ -82,10 +90,10 @@ export namespace BookRepository {
       .leftJoinAndSelect("Book.statuses", "Status")
       .getMany();
 
-    console.log("BOOKS", books);
+    const books = response.sort((a, b) => a.id - b.id);
 
     await wait(1000);
 
-    return { books, finalPage };
+    return { books, firstPage, finalPage };
   };
 }

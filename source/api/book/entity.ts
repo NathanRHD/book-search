@@ -22,7 +22,7 @@ export class Book extends BaseEntity {
   @Column()
   author: string;
 
-  @ManyToMany((type) => Status)
+  @ManyToMany((type) => Status, { cascade: true })
   @JoinTable()
   statuses: Status[];
 }

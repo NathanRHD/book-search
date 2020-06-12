@@ -18,6 +18,6 @@ export class Status extends BaseEntity {
   @Column()
   description: string;
 
-  @ManyToMany((type) => Book)
+  @ManyToMany((type) => Book, { cascade: true })
   books: Book[];
 }

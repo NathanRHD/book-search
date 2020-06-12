@@ -16,13 +16,14 @@ type HomeProps = {} & RouteComponentProps<{}, {}>;
 export const Home: React.FC<HomeProps> = (props) => {
   const { isPending, response, fetch } = useFetch<{
     books: Models.Book.Entity[];
+    firstPage: boolean;
     finalPage: boolean;
   }>(apiSdk["/books/search"]);
 
   const cursor = React.useRef<number>(undefined);
   const direction = React.useRef<"forward" | "backward">("forward");
 
-  const pageSize = 1;
+  const pageSize = 3;
 
   const fetchWithOptions = React.useCallback(
     (searchTerm: string) => {
@@ -92,10 +93,7 @@ export const Home: React.FC<HomeProps> = (props) => {
               <button
                 className="secondary"
                 onClick={goBack}
-                disabled={
-                  isPending ||
-                  (direction.current === "backward" && response.finalPage)
-                }
+                disabled={isPending || response.firstPage}
               >
                 Back
               </button>
@@ -103,10 +101,7 @@ export const Home: React.FC<HomeProps> = (props) => {
               <button
                 className="secondary"
                 onClick={goForward}
-                disabled={
-                  isPending ||
-                  (direction.current === "forward" && response.finalPage)
-                }
+                disabled={isPending || response.finalPage}
               >
                 Forward
               </button>
