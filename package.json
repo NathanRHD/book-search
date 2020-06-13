@@ -10,7 +10,8 @@
     "start": "node distribution/server.js",
     "start:dev": "node -r dotenv/config distribution/server.js",
     "generate-sdk": "ts-node source/api/generate-sdk.ts",
-    "db-dump:dev": "pg_dump nathans-books > dump.sql"
+    "db-restore:prod": "heroku pg:push nathans-books DATABASE_URL --app nathans-books",
+    "db-dump:dev": "pg_dump -Fc --no-acl --no-owner -h localhost -U nathanrussell nathans-books > nathans-books.dump"
   },
   "repository": {
     "type": "git",
