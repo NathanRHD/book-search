@@ -24,7 +24,7 @@ export const Home: React.FC<HomeProps> = (props) => {
   const pageSize = 9;
 
   const fetchWithOptions = React.useCallback(
-    (searchTerm: string, ms?: number) => {
+    async (searchTerm: string, ms?: number) => {
       const body = {
         paginationOptions: {
           direction: direction.current,
@@ -33,7 +33,10 @@ export const Home: React.FC<HomeProps> = (props) => {
         },
         searchTerm,
       };
-      fetch(undefined, body, ms);
+
+      await fetch(undefined, body, ms);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     []
   );
