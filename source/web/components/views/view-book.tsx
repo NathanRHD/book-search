@@ -76,6 +76,10 @@ export namespace ViewBook {
       [book]
     );
 
+    const askToBorrow = React.useCallback(() => {
+      props.router.push(`/details/${props.params.id}/ask-to-borrow`);
+    }, [props.params.id]);
+
     if (isPending && !response) {
       return (
         <div className="view-book">
@@ -106,9 +110,17 @@ export namespace ViewBook {
             </div>
 
             <div className="main">
-              {icons && <div className="statuses">{icons}</div>}
-              <h2>{book.title}</h2>
-              <p className="author">{book.author}</p>
+              <div className="book-details">
+                {icons && <div className="statuses">{icons}</div>}
+                <h2>{book.title}</h2>
+                {book.subtitle && <p className="subtitle">{book.subtitle}</p>}
+                <p className="author">{book.author}</p>
+              </div>
+              <div className="book-footer">
+                <button className="primary" onClick={askToBorrow}>
+                  Ask to Borrow
+                </button>
+              </div>
             </div>
           </>
         )}

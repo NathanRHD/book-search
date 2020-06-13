@@ -16,7 +16,7 @@
 
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 
   > .main {
     flex-grow: 1;
@@ -31,11 +31,27 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    > .author {
+    > .subtitle {
       display: block;
       margin: 0;
 
       font-size: var(--font-size-medium);
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    > .author {
+      display: block;
+
+      margin: 0;
+      margin-top: var(--spacing-medium);
+
+      font-size: var(--font-size-medium);
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

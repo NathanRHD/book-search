@@ -56,36 +56,56 @@
   }
   > .main {
     flex-grow: 1;
-    padding: var(--spacing-medium);
 
-    > h2 {
-      font-size: var(--font-size-large);
+    display: flex;
+    flex-direction: column;
+
+    > .book-details {
+      flex-grow: 1;
+      padding: var(--spacing-medium);
+
+      > h2 {
+        font-size: var(--font-size-large);
+      }
+
+      > .statuses {
+        float: right;
+
+        display: flex;
+        flex-direction: column;
+
+        > .status {
+          text-align: center;
+          margin-bottom: var(--spacing-large);
+
+          i {
+            color: $gray-x-dark;
+            font-size: var(--font-size-xxlarge);
+            margin-bottom: var(--spacing-small);
+          }
+          .description {
+            font-size: var(--font-size-small);
+          }
+        }
+      }
+
+      > .author {
+        margin-top: var(--spacing-medium);
+      }
     }
-
-    > .statuses {
-      float: right;
+    > .book-footer {
+      padding: var(--spacing-small);
+      border-top: 1px solid $gray-x-light;
 
       display: flex;
-      flex-direction: column;
+      justify-content: flex-end;
 
-      > .status {
-        text-align: center;
-        margin-bottom: var(--spacing-large);
-
-        i {
-          color: $gray-x-dark;
-          font-size: var(--font-size-xxlarge);
-          margin-bottom: var(--spacing-small);
-        }
-        .description {
-          font-size: var(--font-size-small);
-        }
+      > button {
+        padding: var(--spacing-small);
       }
     }
 
     &.pending {
-      display: flex;
-
       align-items: center;
       justify-content: center;
     }

@@ -74,6 +74,7 @@ body {
         box-shadow: 0 var(--spacing-small) var(--spacing-small) 0 rgba(0, 0, 0, 0.75) inset; }
   .home > .main {
     flex-grow: 1;
+    flex-shrink: 0;
     padding: var(--spacing-xxlarge);
     display: flex;
     flex-direction: column;
@@ -83,6 +84,7 @@ body {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(var(--min-card-width), 1fr));
+      grid-auto-rows: 1fr;
       grid-gap: var(--spacing-large); }
       .home > .main > .search-results .card {
         animation-fill-mode: both;
@@ -107,6 +109,7 @@ body {
         .home > .main > .search-results .card:nth-child(9) {
           animation-delay: 0.5s; }
     .home > .main > .pagination-controls {
+      flex-shrink: 0;
       margin-top: var(--spacing-xlarge);
       display: flex;
       flex-direction: row;
@@ -244,7 +247,7 @@ body {
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  align-items: center; }
+  align-items: flex-start; }
   .card > .main {
     flex-grow: 1;
     overflow: hidden; }
@@ -254,10 +257,21 @@ body {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
+    .card > .main > .subtitle {
+      display: block;
+      margin: 0;
+      font-size: var(--font-size-medium);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
     .card > .main > .author {
       display: block;
       margin: 0;
-      font-size: var(--font-size-medium); }
+      margin-top: var(--spacing-medium);
+      font-size: var(--font-size-medium);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
   .card > i {
     color: #212121;
     font-size: var(--font-size-xxlarge);
@@ -553,24 +567,36 @@ body {
         display: none; } }
   .view-book > .main {
     flex-grow: 1;
-    padding: var(--spacing-medium); }
-    .view-book > .main > h2 {
-      font-size: var(--font-size-large); }
-    .view-book > .main > .statuses {
-      float: right;
+    display: flex;
+    flex-direction: column; }
+    .view-book > .main > .book-details {
+      flex-grow: 1;
+      padding: var(--spacing-medium); }
+      .view-book > .main > .book-details > h2 {
+        font-size: var(--font-size-large); }
+      .view-book > .main > .book-details > .statuses {
+        float: right;
+        display: flex;
+        flex-direction: column; }
+        .view-book > .main > .book-details > .statuses > .status {
+          text-align: center;
+          margin-bottom: var(--spacing-large); }
+          .view-book > .main > .book-details > .statuses > .status i {
+            color: #212121;
+            font-size: var(--font-size-xxlarge);
+            margin-bottom: var(--spacing-small); }
+          .view-book > .main > .book-details > .statuses > .status .description {
+            font-size: var(--font-size-small); }
+      .view-book > .main > .book-details > .author {
+        margin-top: var(--spacing-medium); }
+    .view-book > .main > .book-footer {
+      padding: var(--spacing-small);
+      border-top: 1px solid #ededed;
       display: flex;
-      flex-direction: column; }
-      .view-book > .main > .statuses > .status {
-        text-align: center;
-        margin-bottom: var(--spacing-large); }
-        .view-book > .main > .statuses > .status i {
-          color: #212121;
-          font-size: var(--font-size-xxlarge);
-          margin-bottom: var(--spacing-small); }
-        .view-book > .main > .statuses > .status .description {
-          font-size: var(--font-size-small); }
+      justify-content: flex-end; }
+      .view-book > .main > .book-footer > button {
+        padding: var(--spacing-small); }
     .view-book > .main.pending {
-      display: flex;
       align-items: center;
       justify-content: center; }
 

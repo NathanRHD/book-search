@@ -19,6 +19,7 @@ export namespace Card {
       >
         <div className="main">
           <h2 className="title">{props.title}</h2>
+          {props.subtitle && <span className="subtitle">{props.subtitle}</span>}
           <span className="author">{props.author}</span>
         </div>
         <i className={icon || unreadIcon}></i>
