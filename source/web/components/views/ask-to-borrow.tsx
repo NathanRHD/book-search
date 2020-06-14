@@ -12,10 +12,14 @@ export namespace AskToBorrow {
   type Props = {} & RouteComponentProps<{ id: string }, {}>;
 
   export const Component: React.FC<Props> = (props) => {
-    const captchaSrc = React.useMemo(
-      () => `/api/captcha?cb=${new Date().toISOString()}`,
-      []
-    );
+    const [captchaSrc, setCaptchaSource] = React.useState("");
+
+    const getNewCaptcha = React.useCallback(() => {
+      setCaptchaSource(`/api/captcha?cb=${new Date().toISOString()}`);
+    }, []);
+
+    React.useEffect(() => getNewCaptcha(), [props.params.id]);
+
     const closeDialog = React.useCallback(() => {
       props.router.push(`/details/${props.params.id}`);
     }, [props.params.id]);
@@ -58,9 +62,12 @@ export namespace AskToBorrow {
             onChange={(e) => setEmail(e.target.value)}
           />
           <img src={captchaSrc} className="captcha" width={200} height={100} />
+          <button className="inline get-new-captcha" onClick={getNewCaptcha}>
+            Get new puzzle
+          </button>
           <label htmlFor="captcha-input">
             You're a robot! Only joking&hellip; Or am I? Enter the text from the
-            image above to prove me wrong:
+            puzzle above to prove me wrong:
           </label>
           <input
             id="captcha-input"

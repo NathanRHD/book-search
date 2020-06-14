@@ -656,6 +656,8 @@ body {
       margin-bottom: var(--spacing-medium);
       width: 200px;
       height: 100px; }
+    .dialog.ask-to-borrow > .content > .main .get-new-captcha {
+      margin-bottom: var(--spacing-medium); }
     .dialog.ask-to-borrow > .content > .main label,
     .dialog.ask-to-borrow > .content > .main input {
       display: block;
@@ -785,22 +787,33 @@ table {
 
 button {
   cursor: pointer;
-  border: 1px solid;
-  border-radius: var(--spacing-small);
-  padding: var(--spacing-medium);
   font-size: var(--font-size-medium);
-  background: linear-gradient(90deg, #212121, #454545);
-  border-color: #212121;
-  color: white;
   transition: opacity 0.25s; }
-  button.secondary {
-    background: linear-gradient(90deg, #997300, #ffcc33);
-    text-shadow: 1px 1px #997300;
-    border-color: #997300; }
-  button.primary {
-    background: linear-gradient(90deg, #a01c1c, #ff7575);
-    text-shadow: 1px 1px #a01c1c;
-    border-color: #a01c1c; }
+  button.inline {
+    background-color: transparent;
+    color: black;
+    text-decoration: underline;
+    padding: 0;
+    border: none; }
+    button.inline.secondary {
+      color: #997300; }
+    button.inline.primary {
+      color: #a01c1c; }
+  button:not(.inline) {
+    border: 1px solid;
+    border-radius: var(--spacing-small);
+    padding: var(--spacing-medium);
+    background: linear-gradient(90deg, #212121, #454545);
+    border-color: #212121;
+    color: white; }
+    button:not(.inline).secondary {
+      background: linear-gradient(90deg, #997300, #ffcc33);
+      text-shadow: 1px 1px #997300;
+      border-color: #997300; }
+    button:not(.inline).primary {
+      background: linear-gradient(90deg, #a01c1c, #ff7575);
+      text-shadow: 1px 1px #a01c1c;
+      border-color: #a01c1c; }
   button:disabled {
     cursor: not-allowed;
     opacity: 0.25; }

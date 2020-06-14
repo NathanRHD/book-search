@@ -77,29 +77,45 @@ table {
 
 button {
   cursor: pointer;
-
-  border: 1px solid;
-  border-radius: var(--spacing-small);
-  padding: var(--spacing-medium);
-
   font-size: var(--font-size-medium);
-
-  background: $gray-dark-gradient;
-  border-color: $gray-x-dark;
-  color: white;
 
   transition: opacity 0.25s;
 
-  &.secondary {
-    background: $gold-gradient;
-    text-shadow: 1px 1px $gold-dark;
-    border-color: $gold-dark;
+  &.inline {
+    background-color: transparent;
+    color: black;
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+
+    &.secondary {
+      color: $gold-dark;
+    }
+    &.primary {
+      color: $red-dark;
+    }
   }
 
-  &.primary {
-    background: $red-gradient;
-    text-shadow: 1px 1px $red-dark;
-    border-color: $red-dark;
+  &:not(.inline) {
+    border: 1px solid;
+    border-radius: var(--spacing-small);
+    padding: var(--spacing-medium);
+
+    background: $gray-dark-gradient;
+    border-color: $gray-x-dark;
+    color: white;
+
+    &.secondary {
+      background: $gold-gradient;
+      text-shadow: 1px 1px $gold-dark;
+      border-color: $gold-dark;
+    }
+
+    &.primary {
+      background: $red-gradient;
+      text-shadow: 1px 1px $red-dark;
+      border-color: $red-dark;
+    }
   }
 
   &:disabled {
