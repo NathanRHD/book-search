@@ -1,5 +1,4 @@
 import * as Express from "express";
-import * as captcha from "nodejs-captcha";
 
 import { registerEndpoints } from "../endpoints";
 

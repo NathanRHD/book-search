@@ -1,17 +1,21 @@
 import * as Express from "express";
-import * as captcha from "nodejs-captcha";
+import * as captchaGen from "captchagen";
 
 import { registerEndpoints } from "../endpoints";
 
-import { CaptchaService } from "./service";
+import { JPEGStream } from "canvas";
 
 export namespace CaptchaController {
   const get = async (req: Express.Request, res: Express.Response) => {
-    const newCaptcha = captcha();
+    const newCaptcha = captchaGen.create();
 
-    req.session.captcha = newCaptcha.value;
+    req.session.captcha = newCaptcha.text();
 
-    const data = Buffer.from(newCaptcha.image.split(",")[1], "base64");
+    newCaptcha.generate();
+
+    const stream: JPEGStream = newCaptcha.stream("jpeg");
+
+    const data = await stream.read();
 
     res.contentType("jpeg");
     res.status(200).send(data);
