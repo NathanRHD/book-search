@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "13.3.0"
+  },
   "scripts": {
     "webpack": "webpack --mode development --config ./webpack.config.js",
     "build": "npm run webpack && cp distribution/web.js static/scripts/bundle.js && cp distribution/web.css static/styling/main.css",
