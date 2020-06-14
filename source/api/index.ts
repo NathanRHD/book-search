@@ -39,6 +39,25 @@ const getConnectionOptions = (): Omit<
   }
 };
 
+const getSessionConnectionOptions = () => {
+  switch (process.env.ENV_NAME) {
+    case "dev": {
+      const connectionOptions = getConnectionOptions();
+      return {
+        pool: new Pool(connectionOptions as PoolConfig),
+      };
+    }
+    default: {
+      return {
+        conObject: {
+          connectionString: process.env.DATABASE_URL,
+          ssl: true,
+        },
+      };
+    }
+  }
+};
+
 const init = async () => {
   try {
     const connectionOptions = getConnectionOptions();
@@ -51,13 +70,9 @@ const init = async () => {
       await connection.synchronize();
     }
 
-    const pool = new Pool(connectionOptions as PoolConfig);
-
     apiRouter.use(
       session({
-        store: new (pgSessionConnect(session))({
-          pool,
-        }),
+        store: new (pgSessionConnect(session))(getSessionConnectionOptions()),
         secret: process.env.SESSION_SECRET,
         resave: false,
         cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
