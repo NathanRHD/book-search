@@ -1,35 +1,30 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 
-import "./dialog.scss";
 import "./details.scss";
+import { Dialog } from "../dialog";
 import { CloseButton } from "../close-button";
 
 type DetailsProps = {} & RouteComponentProps<{}, {}>;
 
-export const Details: React.FC<DetailsProps> = props => {
+export const Details: React.FC<DetailsProps> = (props) => {
   const closeDialog = React.useCallback(() => {
     props.router.push("/");
-  }, [props.router]);
-
-  const stopPropOnClick = React.useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      e.stopPropagation();
-    },
-    []
-  );
+  }, []);
 
   return (
     <>
-      <div className="dialog-overlay" onClick={closeDialog}>
-        <div className="dialog details" onClick={stopPropOnClick}>
-          <div className="header">
-            <div className="user-details"></div>
-            <CloseButton.Component to="/" />
-          </div>
-          <div className="content">{props.children}</div>
+      <Dialog.Component
+        onClose={closeDialog}
+        headerItem={<div className="user-details"></div>}
+        className="details"
+      >
+        <div className="header">
+          <div className="user-details" />
+          <CloseButton.Component onClick={closeDialog} />
         </div>
-      </div>
+        {props.children}
+      </Dialog.Component>
     </>
   );
 };

@@ -5,14 +5,14 @@ module.exports = {
   context: __dirname,
   entry: {
     web: path.resolve("./source/web/client.tsx"),
-    server: path.resolve("./source/server.ts")
+    server: path.resolve("./source/server.ts"),
   },
   output: {
     path: path.resolve("./distribution/"),
-    filename: "[name].js"
+    filename: "[name].js",
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".json"]
+    extensions: [".tsx", ".ts", ".js", ".json", ".ttf"],
   },
   target: "node",
   module: {
@@ -21,24 +21,28 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader",
             options: {
               sourceMap: true,
               modules: true,
-              localIdentName: "[local]"
-            }
+              localIdentName: "[local]",
+            },
           },
-          "sass-loader"
-        ]
+          "sass-loader",
+        ],
       },
       {
         test: /\.tsx?$/,
-        loader: "ts-loader"
-      }
-    ]
+        loader: "ts-loader",
+      },
+      {
+        test: /\.node$/,
+        use: "node-loader",
+      },
+    ],
   },
-  plugins: [new MiniCssExtractPlugin()]
+  plugins: [new MiniCssExtractPlugin()],
 };

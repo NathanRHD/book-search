@@ -10,7 +10,7 @@ export const LoadingSpinner = (props: {
     <div
       className="loading-spinner"
       data-inline={props.inline}
-      data-loading={props.loading}
+      data-loading={!!props.loading}
     >
       {props.inline ? (
         <svg

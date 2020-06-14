@@ -36,7 +36,7 @@ export const Home: React.FC<HomeProps> = (props) => {
 
       await fetch(undefined, body, ms);
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0 });
     },
     []
   );

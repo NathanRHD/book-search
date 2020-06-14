@@ -1,0 +1,57 @@
+@import "../../theme/variables.scss";
+
+.dialog.ask-to-borrow {
+  height: auto;
+  width: 500px;
+
+  > .content {
+    > .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+    > .main {
+      flex-grow: 1;
+
+      overflow: hidden;
+
+      padding: var(--spacing-medium);
+
+      .captcha {
+        display: block;
+        border: 1px solid black;
+        margin: 0;
+        margin-top: var(--spacing-xlarge);
+        margin-bottom: var(--spacing-medium);
+        width: 200px;
+        height: 100px;
+      }
+
+      label,
+      input {
+        display: block;
+        margin-bottom: var(--spacing-medium);
+      }
+
+      input {
+        width: 100%;
+      }
+
+      .submit {
+        margin-top: var(--spacing-xlarge);
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        button {
+          flex-grow: 1;
+        }
+        .loading-spinner {
+          height: var(--font-size-xxlarge);
+          margin-left: var(--spacing-medium);
+        }
+      }
+    }
+  }
+}

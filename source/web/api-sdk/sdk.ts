@@ -58,6 +58,44 @@ export const apiSdk = {
       request.send(JSON.stringify(body));
     });
   },
+
+  "/captcha": (params, body) => {
+    const paramsToPath = (params) => `/captcha`;
+
+    return new Promise<any>((res, rej) => {
+      const request = new XMLHttpRequest();
+      request.open("GET", `/api${paramsToPath(params)}`);
+      request.setRequestHeader(
+        "Content-Type",
+        "application/json;charset=UTF-8"
+      );
+      request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          res(JSON.parse(this.responseText));
+        }
+      };
+      request.send(JSON.stringify(body));
+    });
+  },
+
+  "/notification/request-to-borrow": (params, body) => {
+    const paramsToPath = (params) => `/notification/request-to-borrow`;
+
+    return new Promise<any>((res, rej) => {
+      const request = new XMLHttpRequest();
+      request.open("POST", `/api${paramsToPath(params)}`);
+      request.setRequestHeader(
+        "Content-Type",
+        "application/json;charset=UTF-8"
+      );
+      request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          res(JSON.parse(this.responseText));
+        }
+      };
+      request.send(JSON.stringify(body));
+    });
+  },
 };
 
 export const wait = (ms: number) => {
@@ -84,8 +122,6 @@ export const useFetch = <Response>(
       if (ms) {
         promises.push(wait(ms));
       }
-
-      console.log("PROMISES", promises);
 
       const [response] = await Promise.all(promises);
       setIsPending(false);

@@ -2,6 +2,9 @@ import * as express from "express";
 import * as _ from "underscore";
 import { createConnection } from "typeorm";
 import * as PostgressConnectionStringParser from "pg-connection-string";
+import * as session from "express-session";
+import * as pgSessionConnect from "connect-pg-simple";
+import { Pool, PoolConfig } from "pg";
 
 import "reflect-metadata";
 
@@ -46,14 +49,28 @@ const getConnectionOptions = (): Omit<
 
 const init = async () => {
   try {
+    const connectionOptions = getConnectionOptions();
     const connection = await createConnection({
       type: "postgres",
       entities: [Book, Status],
-      ...getConnectionOptions(),
+      ...connectionOptions,
     });
     if (process.env.ENV_NAME === "dev") {
       await connection.synchronize();
     }
+
+    const pool = new Pool(connectionOptions as PoolConfig);
+
+    apiRouter.use(
+      session({
+        store: new (pgSessionConnect(session))({
+          pool,
+        }),
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+      })
+    );
 
     _.keys(endpoints).forEach((key) => {
       // @todo make work with other verbs

@@ -7,10 +7,11 @@ export enum Role {
   Anon,
   User,
   Admin,
+  System,
 }
 
 export type RequestContext = {
-  id: number;
+  id?: number;
   role: Role;
 };
 
@@ -43,6 +44,17 @@ export namespace Models {
   };
 }
 
+export type CaptchaSolveData = {
+  captchaText: string;
+  captchaAttempt: string;
+};
+
+export type NotificationSendData = {
+  message: string;
+  subject: string;
+  to?: string;
+};
+
 export namespace Endpoints {
   export namespace Book {
     export namespace Create {
@@ -62,6 +74,16 @@ export namespace Endpoints {
         firstPage: boolean;
         finalPage: boolean;
       };
+    }
+  }
+  export namespace Notification {
+    export namespace AskToBorrow {
+      export type Request = {
+        captchaAttempt: string;
+        email: string;
+        bookId: number;
+      };
+      export type Response = void;
     }
   }
 }

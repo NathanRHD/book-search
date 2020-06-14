@@ -1,10 +1,11 @@
-@import "../../theme/variables.scss";
+@import "../theme/variables.scss";
 
 $dialog-width: 900px;
 $dialog-height: 600px;
 
 .dialog-overlay {
   background: rgba(0, 0, 0, 0.3);
+
   cursor: pointer;
 
   position: fixed;
@@ -49,6 +50,11 @@ $dialog-height: 600px;
       flex-direction: column;
 
       overflow: hidden;
+
+      > .header {
+        padding: var(--spacing-medium);
+        border-bottom: 1px solid $gray-x-light;
+      }
     }
 
     @media screen and (max-width: $dialog-width),

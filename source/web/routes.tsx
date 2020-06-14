@@ -4,6 +4,7 @@ import { Route, IndexRoute } from "react-router";
 import { Home } from "./components/views/home";
 import { Details } from "./components/views/details";
 import { ViewBook } from "./components/views/view-book";
+import { AskToBorrow } from "./components/views/ask-to-borrow";
 
 export interface RouteDefinition {
   path?: string;
@@ -25,16 +26,22 @@ export const routesDefinitions: RouteDefinition[] = [
         childRoutes: [
           {
             path: ":id",
-            component: ViewBook.Component
-          }
-        ]
-      }
-    ]
-  }
+            component: ViewBook.Component,
+            childRoutes: [
+              {
+                path: "ask-to-borrow",
+                component: AskToBorrow.Component,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 const routeComponentBuilder = (routeDefinitions: RouteDefinition[]) => {
-  const routeComponents = routeDefinitions.map(routeDefinition => {
+  const routeComponents = routeDefinitions.map((routeDefinition) => {
     const childRouteComponents = !routeDefinition.childRoutes
       ? []
       : routeComponentBuilder(routeDefinition.childRoutes);

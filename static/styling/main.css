@@ -169,6 +169,7 @@ body {
 
 .loading-spinner {
   height: 300px;
+  width: auto;
   transition: opacity 0.25s; }
   .loading-spinner[data-inline="true"] {
     height: var(--font-size-large);
@@ -309,44 +310,10 @@ body {
       --font-size-xxxlarge: 2.3rem;
       --min-card-width: 300px; } }
 
-.dialog-overlay {
-  background: rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+.details > .content > .header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2; }
-  @media screen and (max-width: 900px), screen and (max-height: 600px) {
-    .dialog-overlay {
-      cursor: auto; } }
-  .dialog-overlay > .dialog {
-    width: 900px;
-    max-width: 100%;
-    height: 600px;
-    max-height: 100%;
-    border: 1px solid #878787;
-    border-radius: var(--spacing-small);
-    box-shadow: 0 var(--spacing-small) var(--spacing-small) 0 rgba(0, 0, 0, 0.75);
-    background-color: #ffffff;
-    cursor: auto;
-    display: flex;
-    flex-direction: column; }
-    .dialog-overlay > .dialog > .content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden; }
-    @media screen and (max-width: 900px), screen and (max-height: 600px) {
-      .dialog-overlay > .dialog {
-        border: none;
-        border-radius: 0;
-        height: 100%;
-        width: 100%; } }
+  flex-direction: row;
+  justify-content: space-between; }
 
 body {
   --spacing-xxxlarge: 75px;
@@ -380,12 +347,47 @@ body {
       --font-size-xxxlarge: 2.3rem;
       --min-card-width: 300px; } }
 
-.details > .header {
+.dialog-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: var(--spacing-medium);
-  border-bottom: 1px solid #ededed; }
+  align-items: center;
+  justify-content: center;
+  z-index: 2; }
+  @media screen and (max-width: 900px), screen and (max-height: 600px) {
+    .dialog-overlay {
+      cursor: auto; } }
+  .dialog-overlay > .dialog {
+    width: 900px;
+    max-width: 100%;
+    height: 600px;
+    max-height: 100%;
+    border: 1px solid #878787;
+    border-radius: var(--spacing-small);
+    box-shadow: 0 var(--spacing-small) var(--spacing-small) 0 rgba(0, 0, 0, 0.75);
+    background-color: #ffffff;
+    cursor: auto;
+    display: flex;
+    flex-direction: column; }
+    .dialog-overlay > .dialog > .content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; }
+      .dialog-overlay > .dialog > .content > .header {
+        padding: var(--spacing-medium);
+        border-bottom: 1px solid #ededed; }
+    @media screen and (max-width: 900px), screen and (max-height: 600px) {
+      .dialog-overlay > .dialog {
+        border: none;
+        border-radius: 0;
+        height: 100%;
+        width: 100%; } }
 
 body {
   --spacing-xxxlarge: 75px;
@@ -526,6 +528,9 @@ body {
       display: flex;
       flex-direction: column;
       overflow: hidden; }
+      .dialog-overlay > .dialog > .content > .header {
+        padding: var(--spacing-medium);
+        border-bottom: 1px solid #ededed; }
     @media screen and (max-width: 900px), screen and (max-height: 600px) {
       .dialog-overlay > .dialog {
         border: none;
@@ -599,6 +604,74 @@ body {
     .view-book > .main.pending {
       align-items: center;
       justify-content: center; }
+
+body {
+  --spacing-xxxlarge: 75px;
+  --spacing-xxlarge: 50px;
+  --spacing-xlarge: 40px;
+  --spacing-large: 20px;
+  --spacing-medium: 10px;
+  --spacing-small: 5px;
+  --spacing-xsmall: 2.5px;
+  --font-size-small: 0.8rem;
+  --font-size-medium: 1rem;
+  --font-size-large: 1.3rem;
+  --font-size-xlarge: 1.9rem;
+  --font-size-xxlarge: 2.3rem;
+  --font-size-xxxlarge: 3rem;
+  --min-card-width: 350px; }
+  @media screen and (max-width: 500px) {
+    body {
+      --spacing-xxxlarge: 50px;
+      --spacing-xxlarge: 40px;
+      --spacing-xlarge: 20px;
+      --spacing-large: 10px;
+      --spacing-medium: 5px;
+      --spacing-small: 2.5px;
+      --spacing-xsmall: 1px;
+      --font-size-small: 0.7rem;
+      --font-size-medium: 0.8rem;
+      --font-size-large: 1rem;
+      --font-size-xlarge: 1.3rem;
+      --font-size-xxlarge: 1.6rem;
+      --font-size-xxxlarge: 2.3rem;
+      --min-card-width: 300px; } }
+
+.dialog.ask-to-borrow {
+  height: auto;
+  width: 500px; }
+  .dialog.ask-to-borrow > .content > .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end; }
+  .dialog.ask-to-borrow > .content > .main {
+    flex-grow: 1;
+    overflow: hidden;
+    padding: var(--spacing-medium); }
+    .dialog.ask-to-borrow > .content > .main .captcha {
+      display: block;
+      border: 1px solid black;
+      margin: 0;
+      margin-top: var(--spacing-xlarge);
+      margin-bottom: var(--spacing-medium);
+      width: 200px;
+      height: 100px; }
+    .dialog.ask-to-borrow > .content > .main label,
+    .dialog.ask-to-borrow > .content > .main input {
+      display: block;
+      margin-bottom: var(--spacing-medium); }
+    .dialog.ask-to-borrow > .content > .main input {
+      width: 100%; }
+    .dialog.ask-to-borrow > .content > .main .submit {
+      margin-top: var(--spacing-xlarge);
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+      .dialog.ask-to-borrow > .content > .main .submit button {
+        flex-grow: 1; }
+      .dialog.ask-to-borrow > .content > .main .submit .loading-spinner {
+        height: var(--font-size-xxlarge);
+        margin-left: var(--spacing-medium); }
 
 @keyframes rotate-in {
   0% {

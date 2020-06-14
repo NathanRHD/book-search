@@ -21,6 +21,7 @@
 
 .loading-spinner {
   height: 300px;
+  width: auto;
   &[data-inline="true"] {
     height: var(--font-size-large);
     display: inline;
