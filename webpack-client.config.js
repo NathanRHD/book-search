@@ -5,14 +5,13 @@ module.exports = {
   context: __dirname,
   entry: {
     web: path.resolve("./source/web/client.tsx"),
-    server: path.resolve("./source/server.ts"),
   },
   output: {
     path: path.resolve("./distribution/"),
     filename: "[name].js",
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".json"],
+    extensions: [".tsx", ".ts", ".js", ".json", ".node"],
   },
   target: "node",
   module: {

@@ -7,7 +7,7 @@
     "node": "13.3.0"
   },
   "scripts": {
-    "webpack": "webpack --mode development --config ./webpack.config.js",
+    "webpack": "webpack --mode development --config ./webpack-client.config.js && webpack --mode development --config ./webpack-server.config.js",
     "build": "npm run webpack && cp distribution/web.js static/scripts/bundle.js && cp distribution/web.css static/styling/main.css",
     "serve": "node distribution/server.js",
     "start": "node distribution/server.js",
@@ -67,6 +67,7 @@
     "ts-loader": "^5.3.3",
     "typescript": "^3.9.5",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }
