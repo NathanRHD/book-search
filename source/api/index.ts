@@ -32,9 +32,11 @@ const getConnectionOptions = (): Omit<
       };
     }
     default: {
+      console.log("database url", process.env.DATABASE_URL);
       const connectionOptions = PostgressConnectionStringParser.parse(
         process.env.DATABASE_URL
       );
+      console.log("parsed", connectionOptions);
 
       return {
         database: connectionOptions.database,
