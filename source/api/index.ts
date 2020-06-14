@@ -32,18 +32,8 @@ const getConnectionOptions = (): Omit<
       };
     }
     default: {
-      console.log("database url", process.env.DATABASE_URL);
-      const connectionOptions = PostgressConnectionStringParser.parse(
-        process.env.DATABASE_URL
-      );
-      console.log("parsed", connectionOptions);
-
       return {
-        database: connectionOptions.database,
-        host: connectionOptions.host,
-        port: Number(connectionOptions.port) || 5432,
-        username: connectionOptions.user,
-        password: connectionOptions.password,
+        url: process.env.DATABASE_URL,
       };
     }
   }
