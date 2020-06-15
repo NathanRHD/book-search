@@ -42,7 +42,7 @@ body {
 .home {
   display: flex;
   flex-direction: column;
-  height: 100%; }
+  min-height: 100vh; }
   .home > .header {
     position: sticky;
     top: 0;
@@ -80,6 +80,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between; }
+    .home > .main.loading {
+      justify-content: center; }
     .home > .main > .search-results {
       width: 100%;
       display: grid;
@@ -114,13 +116,40 @@ body {
       display: flex;
       flex-direction: row;
       align-items: center;
-      width: 250px; }
+      width: 300px; }
       .home > .main > .pagination-controls > button {
         flex-basis: 0;
         flex-grow: 1; }
       .home > .main > .pagination-controls > .loading-spinner {
         height: 60px;
         margin: 0 var(--spacing-large); }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-large);
+  background-color: #ededed; }
+  .footer > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #878787;
+    font-weight: bold;
+    font-size: var(--font-size-large);
+    text-decoration: none;
+    transition: color 0.125s; }
+    .footer > a > .logo {
+      height: var(--font-size-xlarge);
+      width: auto;
+      margin-right: var(--spacing-medium); }
+      .footer > a > .logo > path {
+        fill: #878787;
+        transition: fill 0.125s; }
+    .footer > a:hover {
+      color: #0e8c73; }
+      .footer > a:hover > .logo > path {
+        fill: #0e8c73; }
 
 body {
   --spacing-xxxlarge: 75px;
@@ -277,6 +306,41 @@ body {
     color: #212121;
     font-size: var(--font-size-xxlarge);
     margin-left: var(--spacing-large); }
+
+body {
+  --spacing-xxxlarge: 75px;
+  --spacing-xxlarge: 50px;
+  --spacing-xlarge: 40px;
+  --spacing-large: 20px;
+  --spacing-medium: 10px;
+  --spacing-small: 5px;
+  --spacing-xsmall: 2.5px;
+  --font-size-small: 0.8rem;
+  --font-size-medium: 1rem;
+  --font-size-large: 1.3rem;
+  --font-size-xlarge: 1.9rem;
+  --font-size-xxlarge: 2.3rem;
+  --font-size-xxxlarge: 3rem;
+  --min-card-width: 350px; }
+  @media screen and (max-width: 500px) {
+    body {
+      --spacing-xxxlarge: 50px;
+      --spacing-xxlarge: 40px;
+      --spacing-xlarge: 20px;
+      --spacing-large: 10px;
+      --spacing-medium: 5px;
+      --spacing-small: 2.5px;
+      --spacing-xsmall: 1px;
+      --font-size-small: 0.7rem;
+      --font-size-medium: 0.8rem;
+      --font-size-large: 1rem;
+      --font-size-xlarge: 1.3rem;
+      --font-size-xxlarge: 1.6rem;
+      --font-size-xxxlarge: 2.3rem;
+      --min-card-width: 300px; } }
+
+.logo {
+  overflow: visible; }
 
 body {
   --spacing-xxxlarge: 75px;
@@ -737,13 +801,13 @@ body {
 
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   font-family: "Lato", sans-serif;
   font-weight: 400;
   margin: 0; }
 
 #root {
-  min-height: 100%; }
+  min-height: 100vh; }
 
 p,
 li {

@@ -10,6 +10,7 @@ import { RouteComponentProps } from "react-router";
 import { useFetch, apiSdk } from "../../api-sdk/sdk";
 import { Endpoints } from "../../api-sdk/typings";
 import { useThrottle } from "../../helpers/async-hooks";
+import { Logo } from "../logo";
 
 type HomeProps = {} & RouteComponentProps<{}, {}>;
 
@@ -75,53 +76,61 @@ export const Home: React.FC<HomeProps> = (props) => {
   }, [response, searchTerm]);
 
   return (
-    <div className="home">
-      <Helmet
-        defaultTitle="Nathan's Books"
-        titleTemplate="Nathan's Books | %s"
-      />
+    <>
+      <div className="home">
+        <Helmet
+          defaultTitle="Nathan's Books"
+          titleTemplate="Nathan's Books | %s"
+        />
 
-      <div className="header">
-        <h1>Nathan's Books</h1>
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search titles here..."
-            value={searchTerm}
-            onChange={onSearchTermChange}
-          />
+        <div className="header">
+          <h1>Nathan's Books</h1>
+          <div className="search-box">
+            <input
+              type="text"
+              placeholder="Search titles here..."
+              value={searchTerm}
+              onChange={onSearchTermChange}
+            />
+          </div>
+        </div>
+        <div className={`main${isPending && !response ? " loading" : ""}`}>
+          {response && (
+            <>
+              <div className="search-results">
+                {response.books.map((book) => (
+                  <Card.Component {...book} key={book.id} />
+                ))}
+              </div>
+              <div className="pagination-controls">
+                <button
+                  className="secondary"
+                  onClick={goBack}
+                  disabled={isPending || response.firstPage}
+                >
+                  Back
+                </button>
+                <LoadingSpinner inline loading={isPending} />
+                <button
+                  className="secondary"
+                  onClick={goForward}
+                  disabled={isPending || response.finalPage}
+                >
+                  Forward
+                </button>
+              </div>
+            </>
+          )}
+          {isPending && !response && <LoadingSpinner loading />}
+          {props.children}
         </div>
       </div>
-      <div className="main">
-        {response && (
-          <>
-            <div className="search-results">
-              {response.books.map((book) => (
-                <Card.Component {...book} key={book.id} />
-              ))}
-            </div>
-            <div className="pagination-controls">
-              <button
-                className="secondary"
-                onClick={goBack}
-                disabled={isPending || response.firstPage}
-              >
-                Back
-              </button>
-              <LoadingSpinner inline loading={isPending} />
-              <button
-                className="secondary"
-                onClick={goForward}
-                disabled={isPending || response.finalPage}
-              >
-                Forward
-              </button>
-            </div>
-          </>
-        )}
-        {isPending && !response && <LoadingSpinner loading />}
-        {props.children}
+      <div className="footer">
+        <a href="https://www.seagreencube.com">
+          <Logo />
+          Sea Green Cube
+        </a>
       </div>
-    </div>
+    </>
   );
 };

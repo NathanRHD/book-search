@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
 
-  height: 100%;
+  min-height: 100vh;
 
   > .header {
     position: sticky;
@@ -74,6 +74,10 @@
     align-items: center;
     justify-content: space-between;
 
+    &.loading {
+      justify-content: center;
+    }
+
     > .search-results {
       width: 100%;
 
@@ -110,7 +114,7 @@
       flex-direction: row;
       align-items: center;
 
-      width: 250px;
+      width: 300px;
 
       > button {
         flex-basis: 0;
@@ -120,6 +124,47 @@
       > .loading-spinner {
         height: 60px;
         margin: 0 var(--spacing-large);
+      }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-large);
+  background-color: $gray-x-light;
+
+  > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: $gray-light;
+    font-weight: bold;
+    font-size: var(--font-size-large);
+    text-decoration: none;
+
+    transition: color 0.125s;
+
+    > .logo {
+      height: var(--font-size-xlarge);
+      width: auto;
+      margin-right: var(--spacing-medium);
+
+      > path {
+        fill: $gray-light;
+        transition: fill 0.125s;
+      }
+    }
+
+    &:hover {
+      color: $green;
+
+      > .logo {
+        > path {
+          fill: $green;
+        }
       }
     }
   }
