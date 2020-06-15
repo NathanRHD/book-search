@@ -56,7 +56,7 @@ clientRouter.use((req, res, next) => {
         ${ReactDOMServer.renderToString(React.createElement(ServerApp))}
     </div>
     <script src="/scripts/bundle.js"></script>
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,IntersectionObserverEntry,fetch,Promise"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CIntersectionObserver%2CIntersectionObserverEntry%2Cfetch%2CPromise"></script>
 </body>
 </html>`;
 

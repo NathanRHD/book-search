@@ -9,10 +9,14 @@ import Helmet from "react-helmet";
 import { Endpoints, Models } from "../../api-sdk/typings";
 import { apiSdk, useFetch } from "../../api-sdk/sdk";
 import { LoadingSpinner } from "../loading-spinner";
+import { unreadIcon, unreadDescription } from "../../helpers/status";
 
-export const StatusIcon: React.FC<Models.Status> = (props) => (
+export const StatusIcon: React.FC<Pick<
+  Models.Status,
+  "icon" | "description"
+>> = (props) => (
   <div className="status">
-    <i className={props.icon} key={props.id} />
+    <i className={props.icon} />
     <p className="description">{props.description}</p>
   </div>
 );
@@ -68,13 +72,23 @@ export namespace ViewBook {
       [books]
     );
 
-    const icons = React.useMemo(
-      () =>
-        book?.statuses.map((status) => (
-          <StatusIcon {...status} key={status.id} />
-        )),
-      [book]
-    );
+    const icons = React.useMemo(() => {
+      const mappedStatuses = book?.statuses.map((status) => (
+        <StatusIcon {...status} key={status.id} />
+      ));
+
+      if (!book?.statuses.find((book) => book.id === 1)) {
+        mappedStatuses.push(
+          <StatusIcon
+            description={unreadDescription}
+            icon={unreadIcon}
+            key={"Unread"}
+          />
+        );
+      }
+
+      return mappedStatuses;
+    }, [book]);
 
     const askToBorrow = React.useCallback(() => {
       props.router.push(`/details/${props.params.id}/ask-to-borrow`);
