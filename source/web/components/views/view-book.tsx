@@ -77,7 +77,7 @@ export namespace ViewBook {
         <StatusIcon {...status} key={status.id} />
       ));
 
-      if (!book?.statuses.find((book) => book.id === 1)) {
+      if (book && !book.statuses.find((book) => book.id === 1)) {
         mappedStatuses.push(
           <StatusIcon
             description={unreadDescription}

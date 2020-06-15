@@ -591,7 +591,8 @@ body {
             font-size: var(--font-size-xxlarge);
             margin-bottom: var(--spacing-small); }
           .view-book > .main > .book-details > .statuses > .status .description {
-            font-size: var(--font-size-small); }
+            font-size: var(--font-size-small);
+            margin-bottom: 0; }
       .view-book > .main > .book-details > .author {
         margin-top: var(--spacing-medium); }
     .view-book > .main > .book-footer {
