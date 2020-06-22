@@ -140,16 +140,19 @@
     flex-direction: row;
     align-items: center;
     color: $gray-light;
-    font-weight: bold;
+
+    font-family: "Bungee", sans-serif;
+    font-weight: 300;
+
     font-size: var(--font-size-large);
     text-decoration: none;
 
     padding: var(--spacing-large);
 
-    transition: color 0.125s;
+    transition: color 0.25s;
 
     > .logo {
-      height: var(--font-size-xlarge);
+      height: var(--font-size-large);
       width: auto;
       margin-right: var(--spacing-medium);
 

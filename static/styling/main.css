@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Rubik:ital,wght@1,900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Bungee&family=Lato:wght@300;700&family=Rubik:ital,wght@1,900&display=swap);
 body {
   --spacing-xxxlarge: 75px;
   --spacing-xxlarge: 50px;
@@ -134,13 +134,14 @@ body {
     flex-direction: row;
     align-items: center;
     color: #878787;
-    font-weight: bold;
+    font-family: "Bungee", sans-serif;
+    font-weight: 300;
     font-size: var(--font-size-large);
     text-decoration: none;
     padding: var(--spacing-large);
-    transition: color 0.125s; }
+    transition: color 0.25s; }
     .footer > a > .logo {
-      height: var(--font-size-xlarge);
+      height: var(--font-size-large);
       width: auto;
       margin-right: var(--spacing-medium); }
       .footer > a > .logo > path {
@@ -803,7 +804,7 @@ body {
   width: 100%;
   min-height: 100vh;
   font-family: "Lato", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0; }
 
 #root {
@@ -835,7 +836,7 @@ h3 {
 a.inline-link {
   color: #138cbf;
   text-decoration: underline;
-  font-weight: 400; }
+  font-weight: 300; }
 
 table {
   border-collapse: collapse;
@@ -848,7 +849,7 @@ table {
   table td {
     padding: var(--spacing-medium); }
   table tr.emphasis {
-    font-weight: 400; }
+    font-weight: 300; }
 
 button {
   cursor: pointer;
