@@ -30,7 +30,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "captchagen": "^1.2.0",
-    "nodemailer": "^6.4.8",
+    "nodemailer": "^6.4.16",
     "pg": "^8.2.1",
     "pg-native": "^3.0.0",
     "react": "^16.7.0-alpha.2",
